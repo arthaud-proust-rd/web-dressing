@@ -1,13 +1,22 @@
 <x-app-layout>
     <h1 class="h1">Ajouter un vêtement</h1>
     <form
-        action="{{ route('clothing.store') }}"
+        action="{{ route('clothing.destroy', $clothing) }}"
+        method="post"
+        class="flex flex-col gap-4 mt-4"
+    >
+        @csrf
+        @method('DELETE')
+        <input class="btn-danger ml-auto" type="submit" value="Supprimer"/>
+    </form>
+    <form
+        action="{{ route('clothing.update', $clothing) }}"
         method="post"
         enctype="multipart/form-data"
         class="flex flex-col gap-4"
     >
         @csrf
-        @method('POST')
+        @method('PATCH')
 
         @if ($errors->any())
             <div class="flex-col gap-2">
@@ -22,23 +31,26 @@
         <livewire:input type="select"
                         name="dressing_id"
                         title="Dressing"
+                        :bind="$clothing"
                         :options="$dressings->pluck('id', 'name')->toArray()"/>
 
 
-        <livewire:input type="text" name="name" title="Nom"/>
+        <livewire:input type="text" name="name" title="Nom" :bind="$clothing"/>
 
         <livewire:input type="select"
                         name="note"
                         title="Note"
+                        :bind="$clothing"
                         :options="[0,1,2,3,4,5]"/>
 
         <livewire:input type="select"
                         name="category"
                         title="Catégorie"
+                        :bind="$clothing"
                         :options="$clothingCategories"/>
 
-        <livewire:input type="file" name="image_front" title="Image face"/>
-        <livewire:input type="file" name="image_back" title="Image dos"/>
+        <livewire:input type="file" name="image_front" title="Image face" :bind="$clothing"/>
+        <livewire:input type="file" name="image_back" title="Image dos" :bind="$clothing"/>
 
         <input class="btn-primary" type="submit" value="Enregistrer"/>
 

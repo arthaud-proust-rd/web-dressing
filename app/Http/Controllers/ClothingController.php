@@ -54,26 +54,14 @@ class ClothingController extends Controller
         return redirect()->route('dressing.show', $clothing->dressing_id);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Clothing  $clothing
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Clothing $clothing)
+    public function show(Clothing $clothing): View
     {
         return view('clothing.show', [
             'clothing' => $clothing,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Clothing  $clothing
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Clothing $clothing)
+    public function edit(Clothing $clothing): View
     {
         return view('clothing.edit', [
             'clothing' => $clothing,
@@ -82,16 +70,8 @@ class ClothingController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateClothingRequest  $request
-     * @param  \App\Models\Clothing  $clothing
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateClothingRequest $request, Clothing $clothing)
+    public function update(UpdateClothingRequest $request, Clothing $clothing): RedirectResponse
     {
-
         $clothing->dressing_id = request('dressing_id');
         $clothing->name = request('name');
         $clothing->note = request('note');
@@ -109,17 +89,13 @@ class ClothingController extends Controller
 
         $clothing->save();
 
-        return redirect()->route('dressing.show', $clothing->dressing_id);
+        return redirect()->route('clothing.show', $clothing);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Clothing  $clothing
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Clothing $clothing)
+    public function destroy(Clothing $clothing): RedirectResponse
     {
-        //
+        $clothing->delete();
+
+        return redirect()->route('dressing.show', $clothing->dressing_id);
     }
 }

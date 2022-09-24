@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -13,15 +14,20 @@ class Input extends Component
     public string $name;
     public string $type;
     public array $options;
+    public Model $bind;
 
     public bool $isFileLoading = false;
     public bool $isFileLoaded = false;
 
     public $value;
 
-    public function mount()
+    public function mount($name, $bind=null)
     {
-        $this->value = old('note');
+        if($bind) {
+            $this->value = old($name)?old($name):$bind[$name];
+        } else {
+            $this->value = old($name);
+        }
     }
 
     public function render()

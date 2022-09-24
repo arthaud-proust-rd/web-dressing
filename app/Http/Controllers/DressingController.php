@@ -6,6 +6,7 @@ use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
 use App\Models\Clothing;
 use App\Models\Dressing;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class DressingController extends Controller
@@ -56,8 +57,10 @@ class DressingController extends Controller
         return redirect()->route('dressing.show', $dressing->id);
     }
 
-    public function destroy(Dressing $dressing)
+    public function destroy(Dressing $dressing): RedirectResponse
     {
-        //
+        $dressing->delete();
+
+        return redirect()->route('dressing.index');
     }
 }

@@ -3,6 +3,7 @@
     <h1 class="h1">Dressing {{ $dressing->name }}</h1>
     <div class="mb-6">
         <a class="btn-primary" href="{{ route('clothing.create') }}">Ajouter un vêtement</a>
+        <a class="btn-secondary" href="{{ route('dressing.edit', $dressing) }}">Modifier le dressing</a>
     </div>
     <livewire:dressing.clothes :dressing="$dressing" />
 </x-app-layout>

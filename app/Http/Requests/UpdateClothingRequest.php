@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ClothingCategory;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateClothingRequest extends FormRequest
 {
@@ -24,7 +26,10 @@ class UpdateClothingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'dressing_id' => ['required', 'exists:dressings,id'],
+            'name' => ['required', 'string'],
+            'note' => ['required', 'between:0,5'],
+            'category' => ['required', Rule::in(ClothingCategory::list())]
         ];
     }
 }

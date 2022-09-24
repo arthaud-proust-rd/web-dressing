@@ -25,7 +25,7 @@
                 @endforeach
             </select>
         @else
-            <input class="input" type="{{ $type }}" name="{{ $name }}">
+            <input class="input" type="{{ $type }}" name="{{ $name }}" value="{{ $value }}">
         @endif
     </label>
     @error($name)
