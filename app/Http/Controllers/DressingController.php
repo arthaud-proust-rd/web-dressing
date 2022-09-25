@@ -44,7 +44,6 @@ class DressingController extends Controller
     {
         return view('dressing.show', [
             'dressing' => $dressing,
-            'user_id' => Auth::user()->id,
             'categories' => ClothingCategory::list()
         ]);
     }
@@ -59,6 +58,7 @@ class DressingController extends Controller
     public function update(UpdateDressingRequest $request, Dressing $dressing)
     {
         $dressing->name = request('name');
+        $dressing->user_id = $request->user()->id;
 
         $dressing->save();
 
