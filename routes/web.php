@@ -12,3 +12,5 @@ Route::resources([
 ]);
 
 Route::get('dressing/{dressing}/add-clothing', [ClothingController::class, 'create'])->name('dressing.add-clothing');
+
+require __DIR__.'/auth.php';
