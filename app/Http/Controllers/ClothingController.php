@@ -12,6 +12,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use App\Helpers\OptimizedImage;
 
 class ClothingController extends Controller
 {
@@ -38,16 +39,8 @@ class ClothingController extends Controller
         $clothing->name = request('name');
         $clothing->note = request('note');
         $clothing->category = request('category');
-
-        $imageFront = $request->file('image_front');
-        if($imageFront) {
-            $clothing->image_front = $imageFront->store('clothing', 'public');
-        }
-
-        $imageBack = $request->file('image_back');
-        if($imageBack) {
-            $clothing->image_back = $imageBack->store('clothing', 'public');
-        }
+        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
+        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
 
         $clothing->save();
 
@@ -76,16 +69,8 @@ class ClothingController extends Controller
         $clothing->name = request('name');
         $clothing->note = request('note');
         $clothing->category = request('category');
-
-        $imageFront = $request->file('image_front');
-        if($imageFront) {
-            $clothing->image_front = $imageFront->store('clothing', 'public');
-        }
-
-        $imageBack = $request->file('image_back');
-        if($imageBack) {
-            $clothing->image_back = $imageBack->store('clothing', 'public');
-        }
+        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
+        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
 
         $clothing->save();
 

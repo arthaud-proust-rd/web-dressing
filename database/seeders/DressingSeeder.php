@@ -17,7 +17,7 @@ class DressingSeeder extends Seeder
     {
         Dressing::factory()
             ->count(2)
-            ->hasClothes(20)
+            ->hasClothes(6)
             ->create();
     }
 }
