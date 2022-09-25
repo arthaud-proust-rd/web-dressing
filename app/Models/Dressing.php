@@ -15,8 +15,12 @@ class Dressing extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'name',
-        'user_id'
+    ];
+
+    protected $casts = [
+        'user_id' => 'int',
     ];
 
     public function clothes(): HasMany

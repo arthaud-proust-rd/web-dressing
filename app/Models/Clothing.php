@@ -15,10 +15,15 @@ class Clothing extends Model
 
     protected $fillable = [
         'name',
+        'dressing_id',
         'note',
         'category',
         'image_front',
         'image_back',
+    ];
+
+    protected $casts = [
+        'dressing_id' => 'int',
     ];
 
     public function dressing(): BelongsTo
