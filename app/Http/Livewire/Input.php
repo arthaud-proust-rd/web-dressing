@@ -23,7 +23,7 @@ class Input extends Component
 
     public function mount($name, $value=null, $bind=null)
     {
-        if($value) {
+        if($value!==null) {
             return;
         }
         if($bind) {

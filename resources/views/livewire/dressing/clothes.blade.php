@@ -15,13 +15,10 @@
             <option value="created_at:desc">Date + à -</option>
         </select>
 
-
-        <button x-bind:class="areFiltersOpen?'btn-primary':'btn-secondary'" @click="areFiltersOpen = !areFiltersOpen">
-            <x-icon.funnel/>
-        </button>
-        <div x-show="areFiltersOpen" class="flex flex-wrap gap-2">
-
-        </div>
+{{--        <button x-bind:class="areFiltersOpen?'btn-primary':'btn-secondary'" @click="areFiltersOpen = !areFiltersOpen">--}}
+{{--            <x-icon.funnel/>--}}
+{{--        </button>--}}
+{{--        <div x-show="areFiltersOpen" class="flex flex-wrap gap-2"></div>--}}
     </div>
     @if($view === "grid")
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 my-6">
@@ -36,7 +33,7 @@
                     <h2 class="h2">{{ $categoryName }}</h2>
                     <div class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-3 my-4 px-3 pb-4">
                         @foreach($this->filteredClothes()->categoryInt($categoryInt)->get() as $clothing)
-                            <livewire:clothing.card :clothing="$clothing" :key="now()->timestamp . $clothing->id"/>
+                            <livewire:clothing.card :clothing="$clothing" :showActions="$categoryInt===0" :key="now()->timestamp . $clothing->id"/>
                         @endforeach
                     </div>
                 </div>

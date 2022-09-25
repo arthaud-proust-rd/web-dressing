@@ -27,8 +27,8 @@ class StoreClothingRequest extends FormRequest
     {
         return [
             'dressing_id' => ['required', 'exists:dressings,id'],
-            'name' => ['required', 'string'],
-            'note' => ['required', 'between:0,5'],
+            'name' => ['nullable', 'string'],
+            'note' => ['required', 'between:1,3'],
             'category' => ['required', Rule::in(ClothingCategory::list())]
         ];
     }

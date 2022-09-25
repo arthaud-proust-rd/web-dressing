@@ -24,6 +24,19 @@
                     </option>
                 @endforeach
             </select>
+        @elseif($type==="radio-select")
+            @if(count($options)>3)
+                <div class="grid grid-cols-2 gap-1 bg-neutral-100 rounded-md">
+            @else
+                <div class="grid grid-flow-col gap-1 bg-neutral-100 rounded-md">
+            @endif
+                @foreach($options as $optKey=>$optValue)
+                    <div>
+                        <input @if($optValue === $value) checked @endif class="hidden peer" type="radio" name="{{ $name }}" id="{{$name}}-{{$optValue}}" value="{{$optValue}}">
+                        <label class="btn-secondary peer-checked:btn-primary" for="{{$name}}-{{$optValue}}">{{$optKey}}</label>
+                    </div>
+                @endforeach
+            </div>
         @else
             <input class="input" type="{{ $type }}" name="{{ $name }}" value="{{ $value }}">
         @endif

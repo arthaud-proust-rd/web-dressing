@@ -8,7 +8,7 @@
     }
 
     .btn {
-        @apply flex flex-row gap-1 items-center cursor-pointer px-4 py-2 rounded-md transition ease-in-out duration-150 font-semibold;
+        @apply flex flex-row gap-1 justify-center items-center cursor-pointer px-4 py-2 rounded-md transition ease-in-out duration-150 font-semibold;
     }
     .btn-primary {
         @apply btn text-white bg-amber-600 hover:bg-amber-500;
