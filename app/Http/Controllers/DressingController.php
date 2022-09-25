@@ -44,6 +44,7 @@ class DressingController extends Controller
     {
         return view('dressing.show', [
             'dressing' => $dressing,
+            'user_id' => Auth::user()->id,
             'categories' => ClothingCategory::list()
         ]);
     }
