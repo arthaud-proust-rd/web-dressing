@@ -34,6 +34,7 @@ class DressingController extends Controller
         $dressing = new Dressing;
 
         $dressing->name = request('name');
+        $dressing->user_id = $request->user()->id;
 
         $dressing->save();
 
@@ -58,7 +59,6 @@ class DressingController extends Controller
     public function update(UpdateDressingRequest $request, Dressing $dressing)
     {
         $dressing->name = request('name');
-        $dressing->user_id = $request->user()->id;
 
         $dressing->save();
 
