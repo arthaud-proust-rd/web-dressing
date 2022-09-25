@@ -23,9 +23,10 @@ class ClothingController extends Controller
         ]);
     }
 
-    public function create(): View
+    public function create(?Dressing $dressing): View
     {
         return view('clothing.create', [
+            'selectedDressing' => $dressing,
             'dressings' => Dressing::all(),
             'clothingCategories' => ClothingCategory::list()
         ]);

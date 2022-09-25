@@ -8,16 +8,16 @@
     }
 
     .btn {
-        @apply cursor-pointer px-4 py-2 rounded-md transition ease-in-out duration-150 font-semibold;
+        @apply flex flex-row gap-1 items-center cursor-pointer px-4 py-2 rounded-md transition ease-in-out duration-150 font-semibold;
     }
     .btn-primary {
         @apply btn text-white bg-amber-600 hover:bg-amber-500;
     }
+    .btn-secondary {
+        @apply btn text-black bg-neutral-100 hover:bg-neutral-200 ;
+    }
     .btn-tertiary {
         @apply btn text-neutral-800 hover:bg-neutral-300;
-    }
-    .btn-secondary {
-        @apply btn text-black bg-gray-100 hover:bg-gray-200 ;
     }
     .btn-danger {
         @apply btn text-white bg-red-500 hover:bg-red-600 ;
@@ -29,5 +29,8 @@
 
     .h1 {
         @apply text-2xl mb-4;
+    }
+    .h2 {
+        @apply text-xl mb-2;
     }
 }

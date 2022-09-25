@@ -1,4 +1,9 @@
 <x-app-layout>
+    @if($selectedDressing->id)
+        <a class="text-gray-400 mb-3" href="{{ route('dressing.show', $selectedDressing) }}">Retour au dressing</a>
+    @else
+        <a class="text-gray-400 mb-3" href="{{ route('dressing.index') }}">Retour aux dressings</a>
+    @endif
     <h1 class="h1">Ajouter un vêtement</h1>
     <form
         action="{{ route('clothing.store') }}"
@@ -22,6 +27,7 @@
         <livewire:input type="select"
                         name="dressing_id"
                         title="Dressing"
+                        :value="$selectedDressing->id"
                         :options="$dressings->pluck('id', 'name')->toArray()"/>
 
 

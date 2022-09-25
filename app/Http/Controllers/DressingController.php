@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ClothingCategory;
 use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
 use App\Models\Clothing;
@@ -37,7 +38,8 @@ class DressingController extends Controller
     public function show(Dressing $dressing): View
     {
         return view('dressing.show', [
-            'dressing' => $dressing
+            'dressing' => $dressing,
+            'categories' => ClothingCategory::list()
         ]);
     }
 

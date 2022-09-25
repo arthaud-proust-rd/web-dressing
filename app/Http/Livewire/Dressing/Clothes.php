@@ -7,21 +7,36 @@ use Livewire\Component;
 
 class Clothes extends Component
 {
+    public $categories;
+
     public Dressing $dressing;
 
+    public bool $areFiltersVisible = false;
+
+    public string $orderBy = 'created_at:desc';
+
+    public string $view = "list";
 
     public function render()
     {
         return view('livewire.dressing.clothes');
     }
 
-    public function showImageBack()
+    public function toggleFiltersVisibility(): void
     {
-        $this->image_path = $this->dressing->image_back;
+        $this->areFiltersVisible = !$this->areFiltersVisible;
     }
 
-    public function showImageFront()
+    public function filteredClothes()
     {
-        $this->image_path = $this->dressing->image_front;
+        [$orderByColumn, $orderByValue] = explode(':', $this->orderBy);
+
+        return $this->dressing->clothes()
+            ->orderBy($orderByColumn, $orderByValue);
+    }
+
+    public function setView(string $view): void
+    {
+        $this->view = $view;
     }
 }

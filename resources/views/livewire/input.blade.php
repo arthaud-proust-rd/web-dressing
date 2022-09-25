@@ -11,7 +11,7 @@
             >
                 <input class="hidden" type="{{ $type }}" name="{{ $name }}" wire:model="value">
                 <div class="btn-secondary">
-                    <span x-show="isUploading"><x-icons.loading class="text-white"  /></span>
+                    <span x-show="isUploading"><x-icon.loading class="text-white"  /></span>
                     <span x-show="!isUploaded">Choisir un fichier</span>
                     <span x-show="isUploaded">Choisir un autre fichier</span>
                 </div>

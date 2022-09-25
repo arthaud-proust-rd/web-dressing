@@ -21,8 +21,11 @@ class Input extends Component
 
     public $value;
 
-    public function mount($name, $bind=null)
+    public function mount($name, $value=null, $bind=null)
     {
+        if($value) {
+            return;
+        }
         if($bind) {
             $this->value = old($name)?old($name):$bind[$name];
         } else {

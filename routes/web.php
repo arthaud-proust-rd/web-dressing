@@ -10,3 +10,5 @@ Route::resources([
     'dressing' => DressingController::class,
     'clothing' => ClothingController::class,
 ]);
+
+Route::get('dressing/{dressing}/add-clothing', [ClothingController::class, 'create'])->name('dressing.add-clothing');

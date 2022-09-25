@@ -39,4 +39,9 @@ class Clothing extends Model
     {
         return $query->where('category', $category->value);
     }
+
+    public function scopeCategoryInt($query, int $category)
+    {
+        return $query->where('category', $category);
+    }
 }

@@ -7,7 +7,9 @@
     >
         @csrf
         @method('DELETE')
-        <input class="btn-danger ml-auto" type="submit" value="Supprimer"/>
+        <button class="btn-danger ml-auto">
+            <x-icon.trash/>
+        </button>
     </form>
     <form
         action="{{ route('dressing.update', $dressing) }}"
