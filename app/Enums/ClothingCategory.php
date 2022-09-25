@@ -9,6 +9,7 @@ enum ClothingCategory: int
     case Pants = 2;
     case Underwear = 3;
     case Pull = 4;
+    case Accessory = 5;
 
     public function toString(): string
     {
@@ -18,6 +19,7 @@ enum ClothingCategory: int
             self::Pants => 'Pantalons',
             self::Underwear => 'Sous-vêtements',
             self::Pull => 'Pulls',
+            self::Accessory => 'Accessoires',
         };
     }
 
