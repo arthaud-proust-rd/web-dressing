@@ -4,13 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DressingController;
 use App\Http\Controllers\ClothingController;
 
-Route::redirect('/', '/dressing');
+Route::middleware('auth')->group(function() {
 
-Route::resources([
-    'dressing' => DressingController::class,
-    'clothing' => ClothingController::class,
-]);
+    Route::redirect('/', '/dressing');
 
-Route::get('dressing/{dressing}/add-clothing', [ClothingController::class, 'create'])->name('dressing.add-clothing');
+    Route::resource('dressing', DressingController::class);
+    Route::resource('clothing',ClothingController::class);
+
+    Route::get('dressing/{dressing}/add-clothing', [ClothingController::class, 'create'])->name('dressing.add-clothing');
+});
 
 require __DIR__.'/auth.php';

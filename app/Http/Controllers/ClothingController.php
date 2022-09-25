@@ -9,6 +9,7 @@ use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -16,6 +17,11 @@ use App\Helpers\OptimizedImage;
 
 class ClothingController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Clothing::class, 'clothing');
+    }
+
     public function index(): View
     {
         return view('clothing.index', [
@@ -27,7 +33,7 @@ class ClothingController extends Controller
     {
         return view('clothing.create', [
             'selectedDressing' => $dressing,
-            'dressings' => Dressing::all(),
+            'dressings' => Auth::user()->dressings,
             'clothingCategories' => ClothingCategory::list()
         ]);
     }
@@ -59,7 +65,7 @@ class ClothingController extends Controller
     {
         return view('clothing.edit', [
             'clothing' => $clothing,
-            'dressings' => Dressing::all(),
+            'dressings' => Auth::user()->dressings,
             'clothingCategories' => ClothingCategory::list()
         ]);
     }
@@ -75,7 +81,7 @@ class ClothingController extends Controller
 
         $clothing->save();
 
-        return redirect()->route('clothing.show', $clothing);
+        return redirect()->route('dressing.show', request('dressing_id'));
     }
 
     public function destroy(Clothing $clothing): RedirectResponse

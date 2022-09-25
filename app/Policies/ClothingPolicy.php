@@ -18,7 +18,7 @@ class ClothingPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class ClothingPolicy
      */
     public function view(User $user, Clothing $clothing)
     {
-        //
+        return $user->id === $clothing->dressing->user_id;
     }
 
     /**
@@ -41,7 +41,7 @@ class ClothingPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class ClothingPolicy
      */
     public function update(User $user, Clothing $clothing)
     {
-        //
+        return $user->id === $clothing->dressing->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class ClothingPolicy
      */
     public function delete(User $user, Clothing $clothing)
     {
-        //
+        return $user->id === $clothing->dressing->user_id;
     }
 
     /**
@@ -77,7 +77,7 @@ class ClothingPolicy
      */
     public function restore(User $user, Clothing $clothing)
     {
-        //
+        return $user->id === $clothing->dressing->user_id;
     }
 
     /**
@@ -89,6 +89,6 @@ class ClothingPolicy
      */
     public function forceDelete(User $user, Clothing $clothing)
     {
-        //
+        return $user->id === $clothing->dressing->user_id;
     }
 }

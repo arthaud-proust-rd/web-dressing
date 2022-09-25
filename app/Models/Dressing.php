@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ClothingCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -14,12 +15,18 @@ class Dressing extends Model
     use SoftDeletes;
 
     protected $fillable = [
-      'name'
+        'name',
+        'user_id'
     ];
 
     public function clothes(): HasMany
     {
         return $this->hasMany(Clothing::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function getClothesCategoriesStatsAttribute(): array

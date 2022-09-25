@@ -8,7 +8,7 @@
                 <x-icon.squares/>
             </button>
         </div>
-        <select wire:model="orderBy" class="btn-secondary" id="">
+        <select wire:model="orderBy" class="btn-secondary pr-8 border-0" id="">
             <option value="note:asc">Note - à +</option>
             <option value="note:desc">Note + à -</option>
             <option value="created_at:asc">Date - à +</option>

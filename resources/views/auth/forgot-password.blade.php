@@ -1,36 +1,27 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+<x-app-layout>
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+    <form
+        class="flex flex-col gap-4 mt-auto mb-6"
+        method="POST"
+        action="{{ route('password.email') }}"
+    >
+        @csrf
+
+        <h1 class="h1">Mot de passe oublié</h1>
+        <p>Nous allons vous envoyer un mail pour réinitialiser votre mot de passe</p>
+
+        <livewire:input type="text" name="email" title="Email"/>
+
+        <button class="btn-primary">
+            Envoyer un mail
+        </button>
+
+        <div class="mt-6 flex flex-col gap-1">
+            <a class="btn-secondary" href="{{ route('login') }}">
+                J'ai retrouvé mon mot de passe
             </a>
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-primary-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+    </form>
+</x-app-layout>

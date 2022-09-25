@@ -1,5 +1,5 @@
 <div class="relative">
-    <label class="flex flex-col">
+    <label class="flex gap-1 {{ $type==="checkbox"?"flex-row-reverse justify-end":"flex-col" }}">
         <span>{{ $title  }}</span>
         @if($type==="file")
             <div
@@ -17,7 +17,7 @@
                 </div>
             </div>
         @elseif($type==="select")
-            <select class="input" name="{{ $name }}">
+            <select class="input pr-4" name="{{ $name }}">
                 @foreach($options as $optKey=>$optValue)
                     <option value="{{ $optValue }}" @if($optValue === $value) selected @endif>
                         {{ $optKey }}

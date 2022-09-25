@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Dressing;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class DressingPolicy
 {
@@ -13,12 +14,13 @@ class DressingPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User $user
+     * @param Dressing $dressing
+     * @return Response|bool
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +32,7 @@ class DressingPolicy
      */
     public function view(User $user, Dressing $dressing)
     {
-        //
+        return $user->id === $dressing->user_id;
     }
 
     /**
@@ -41,7 +43,7 @@ class DressingPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +55,7 @@ class DressingPolicy
      */
     public function update(User $user, Dressing $dressing)
     {
-        //
+        return $user->id === $dressing->user_id;
     }
 
     /**
@@ -65,7 +67,7 @@ class DressingPolicy
      */
     public function delete(User $user, Dressing $dressing)
     {
-        //
+        return $user->id === $dressing->user_id;
     }
 
     /**
@@ -77,7 +79,7 @@ class DressingPolicy
      */
     public function restore(User $user, Dressing $dressing)
     {
-        //
+        return $user->id === $dressing->user_id;
     }
 
     /**
@@ -89,6 +91,6 @@ class DressingPolicy
      */
     public function forceDelete(User $user, Dressing $dressing)
     {
-        //
+        return $user->id === $dressing->user_id;
     }
 }

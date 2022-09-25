@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Dressing;
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
-class DressingSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,14 +16,11 @@ class DressingSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-
-        foreach ($users as $user){
-            Dressing::factory()
-                ->count(2)
-                ->hasClothes(6)
-                ->for($user)
-                ->create();
+        for($i=1; $i<3; $i++) {
+            User::factory()
+                ->create([
+                    'email' => "user$i@email.com"
+                ]);
         }
     }
 }

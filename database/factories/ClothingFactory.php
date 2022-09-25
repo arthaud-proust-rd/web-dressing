@@ -18,8 +18,8 @@ class ClothingFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
-            'note' => $this->faker->numberBetween(0,5),
+//            'name' => $this->faker->word(),
+            'note' => $this->faker->numberBetween(1,3),
             'category' => $this->faker->randomElement(ClothingCategory::cases())
         ];
     }

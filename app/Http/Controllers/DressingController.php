@@ -9,13 +9,18 @@ use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class DressingController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Dressing::class, 'dressing');
+    }
     public function index(): View
     {
         return view('dressing.index', [
-            'dressings' => Dressing::all()
+            'dressings' => Auth::user()->dressings
         ]);
     }
 
