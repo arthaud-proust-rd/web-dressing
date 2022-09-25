@@ -12,10 +12,10 @@
             </select>
 
             <div class="flex flex-row bg-neutral-100 rounded-md">
-                <button class="btn-secondary" wire:click="setView('list')">
+                <button class="{{ $view==='list' ? 'btn-primary' : 'btn-secondary' }}" wire:click="setView('list')">
                     <x-icon.list/>
                 </button>
-                <button class="btn-secondary" wire:click="setView('grid')">
+                <button class="{{ $view==='grid' ? 'btn-primary' : 'btn-secondary' }}" wire:click="setView('grid')">
                     <x-icon.squares/>
                 </button>
             </div>
@@ -29,14 +29,16 @@
         </div>
     @else
         @foreach($categories as $categoryName => $categoryInt)
-            <div class="mt-6">
-                <h2 class="h2">{{ $categoryName }} {{$categoryInt}}</h2>
-                <div class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 my-4">
-                    @foreach($this->filteredClothes()->categoryInt($categoryInt)->get() as $clothing)
-                        <livewire:clothing.card :clothing="$clothing" :key="now()->timestamp . $clothing->id"/>
-                    @endforeach
+            @if($this->filteredClothes()->categoryInt($categoryInt)->count() > 0)
+                <div class="mt-6">
+                    <h2 class="h2">{{ $categoryName }}</h2>
+                    <div class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 my-4">
+                        @foreach($this->filteredClothes()->categoryInt($categoryInt)->get() as $clothing)
+                            <livewire:clothing.card :clothing="$clothing" :key="now()->timestamp . $clothing->id"/>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
+            @endif
 
         @endforeach
     @endif
