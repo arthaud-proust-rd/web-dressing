@@ -13,11 +13,11 @@ enum ClothingCategory: int
     public function toString(): string
     {
         return match($this) {
-            self::ToCategorize => 'A catégoriser',
-            self::Shirt => 'T-shirt',
-            self::Pants => 'Pantalon',
-            self::Underwear => 'Sous-vêtement',
-            self::Pull => 'Pull',
+            self::ToCategorize => 'À catégoriser',
+            self::Shirt => 'T-shirts',
+            self::Pants => 'Pantalons',
+            self::Underwear => 'Sous-vêtements',
+            self::Pull => 'Pulls',
         };
     }
 
