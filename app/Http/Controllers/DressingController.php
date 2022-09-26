@@ -38,6 +38,8 @@ class DressingController extends Controller
 
         $dressing->save();
 
+        session()->flash('status', 'Dressing ajouté');
+
         return redirect()->route('dressing.show', $dressing->id);
     }
 
@@ -62,12 +64,16 @@ class DressingController extends Controller
 
         $dressing->save();
 
+        session()->flash('status', 'Dressing modifié');
+
         return redirect()->route('dressing.show', $dressing->id);
     }
 
     public function destroy(Dressing $dressing): RedirectResponse
     {
         $dressing->delete();
+
+        session()->flash('status', 'Dressing supprimé');
 
         return redirect()->route('dressing.index');
     }

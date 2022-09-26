@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateClothingRequest;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -51,6 +52,8 @@ class ClothingController extends Controller
 
         $clothing->save();
 
+        session()->flash('status', 'Vêtement ajouté');
+
         return redirect()->route('dressing.show', $clothing->dressing_id);
     }
 
@@ -81,12 +84,16 @@ class ClothingController extends Controller
 
         $clothing->save();
 
+        session()->flash('status', 'Vêtement modifié');
+
         return redirect()->route('dressing.show', request('dressing_id'));
     }
 
-    public function destroy(Clothing $clothing): RedirectResponse
+    public function destroy(Request $request, Clothing $clothing): RedirectResponse
     {
         $clothing->delete();
+
+        session()->flash('status', 'Vêtement supprimé');
 
         return redirect()->route('dressing.show', $clothing->dressing_id);
     }

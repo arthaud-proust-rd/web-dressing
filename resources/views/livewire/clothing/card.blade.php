@@ -7,7 +7,7 @@
         @endif
     </a>
     @if($showActions)
-        <div class="lex flex-wrap gap-2">
+        <div class="flex flex-col gap-2 px-2 pb-2">
             <a class="btn-primary" href="{{ route('clothing.edit', $clothing) }}">
                 Modifier
             </a>

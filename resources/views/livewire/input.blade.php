@@ -42,6 +42,6 @@
         @endif
     </label>
     @error($name)
-        <div class="alert alert-danger">{{ $message }}</div>
+        <div class="text-red-600">{{ $message }}</div>
     @enderror
 </div>

@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
     <div class="flex flex-col gap-4 mt-auto mb-6">
         <h1 class="h1">Vérifier votre email</h1>
         <p>Merci de nous avoir rejoints. Nous vous demanderons de cliquer dans le lien reçu par email avant de continuer.</p>
