@@ -11,25 +11,44 @@ class Input extends Component
     use WithFileUploads;
 
     public string $title;
+    public string $property;
     public string $name;
     public string $type;
     public array $options;
-    public Model $bind;
+    public ?Model $bind;
 
-    public bool $isFileLoading = false;
-    public bool $isFileLoaded = false;
+    public ?string $nestedIn;
 
     public $value;
 
-    public function mount($name, $value=null, $bind=null)
+    public function mount($property, $bind=null, $nestedIn=null, $value=null)
+    {
+        $this->property = $property;
+        $this->bind = $bind;
+        $this->nestedIn = $nestedIn;
+        $this->name = $nestedIn ? "${nestedIn}[${property}]" : $this->property;
+
+        $this->defineValueFromDefault($value);
+    }
+
+    private function getBindPropertyValue(): mixed
+    {
+        return $this->nestedIn? $this->bind[$this->nestedIn][$this->property] : $this->bind[$this->property];
+    }
+
+    private function defineValueFromDefault($value): void
     {
         if($value!==null) {
+            $this->value = $value;
             return;
         }
-        if($bind) {
-            $this->value = old($name)?old($name):$bind[$name];
-        } else {
-            $this->value = old($name);
+
+        if($this->bind) {
+            $this->value = $this->getBindPropertyValue();
+        }
+
+        if (old($this->property)) {
+            $this->value = old($this->property);
         }
     }
 

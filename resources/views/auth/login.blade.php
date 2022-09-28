@@ -8,9 +8,9 @@
 
             <h1 class="h1">Connexion</h1>
 
-            <livewire:input type="text" name="email" title="Email"/>
-            <livewire:input type="password" name="password" title="Mot de passe"/>
-            <livewire:input type="checkbox" name="remember" title="Se souvenir de moi"/>
+            <livewire:input type="text" property="email" title="Email"/>
+            <livewire:input type="password" property="password" title="Mot de passe"/>
+            <livewire:input type="checkbox" property="remember" title="Se souvenir de moi"/>
 
             <button class="btn-primary">
                 Se connecter

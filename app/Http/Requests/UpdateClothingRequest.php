@@ -29,7 +29,10 @@ class UpdateClothingRequest extends FormRequest
             'dressing_id' => ['required', 'exists:dressings,id'],
             'name' => ['nullable', 'string'],
             'note' => ['required', 'between:1,3'],
-            'category' => ['required', Rule::in(ClothingCategory::list())]
+            'category' => ['required', Rule::in(ClothingCategory::list())],
+            'weather_options.sunny' => ['nullable'],
+            'weather_options.rainy' => ['nullable'],
+            'weather_options.cold' => ['nullable'],
         ];
     }
 }

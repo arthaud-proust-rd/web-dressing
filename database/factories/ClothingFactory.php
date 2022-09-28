@@ -20,7 +20,12 @@ class ClothingFactory extends Factory
         return [
 //            'name' => $this->faker->word(),
             'note' => $this->faker->numberBetween(1,3),
-            'category' => $this->faker->randomElement(ClothingCategory::cases())
+            'category' => $this->faker->randomElement(ClothingCategory::cases()),
+            'weather_options' => [
+                'rainy' => $this->faker->boolean(),
+                'cold' => $this->faker->boolean(),
+                'sunny' => $this->faker->boolean(),
+            ]
         ];
     }
 }

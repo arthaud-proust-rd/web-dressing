@@ -1,6 +1,9 @@
 <div class="relative">
     <label class="flex gap-1 {{ $type==="checkbox"?"flex-row-reverse justify-end":"flex-col" }}">
-        <span>{{ $title  }}</span>
+        @if(!$nestedIn)
+            <span>{{ $title  }}</span>
+        @endif
+
         @if($type==="file")
             <div
                 x-data="{ isUploading: false, isUploaded: false, progress: 0 }"
@@ -37,6 +40,21 @@
                     </div>
                 @endforeach
             </div>
+        @elseif($type==="checkbox-button")
+            <div>
+                <input @if($value===true) checked @endif class="hidden peer" type="checkbox" name="{{ $name }}" id="{{$name}}">
+                <label class="btn-secondary peer-checked:btn-primary" for="{{$name}}">{{$title}}</label>
+            </div>
+        @elseif($type==="checkboxes-group")
+            @if(count($options)>3)
+                <div class="grid grid-cols-2 gap-1 bg-neutral-100 rounded-md">
+            @else
+                <div class="grid grid-flow-col gap-1 bg-neutral-100 rounded-md">
+            @endif
+                @foreach($options as $optKey=>$optValue)
+                    <livewire:input :bind="$bind" :property="$optValue" :nestedIn="$name" :title="$optKey" type="checkbox-button" />
+                @endforeach
+             </div>
         @else
             <input class="input" type="{{ $type }}" name="{{ $name }}" value="{{ $value }}">
         @endif

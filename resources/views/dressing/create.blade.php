@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        <livewire:input type="text" name="name" title="Nom"/>
+        <livewire:input type="text" property="name" title="Nom"/>
 
         <input class="btn-primary" type="submit" value="Enregistrer"/>
 

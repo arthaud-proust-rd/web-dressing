@@ -30,7 +30,7 @@
             </div>
         @endif
 
-        <livewire:input type="text" name="name" title="Nom" :bind="$dressing"/>
+        <livewire:input type="text" property="name" title="Nom" :bind="$dressing"/>
 
         <input class="btn-primary" type="submit" value="Enregistrer"/>
 

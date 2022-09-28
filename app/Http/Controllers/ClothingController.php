@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ClothingCategory;
+use App\Enums\ClothingWeatherOptions;
 use App\Http\Requests\StoreClothingRequest;
 use App\Http\Requests\UpdateClothingRequest;
 use App\Models\Clothing;
@@ -35,13 +36,13 @@ class ClothingController extends Controller
         return view('clothing.create', [
             'selectedDressing' => $dressing,
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list()
+            'clothingCategories' => ClothingCategory::list(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::list(),
         ]);
     }
 
     public function store(StoreClothingRequest $request): RedirectResponse
     {
-
         $clothing = new Clothing;
         $clothing->dressing_id = request('dressing_id');
         $clothing->name = request('name');
@@ -49,6 +50,12 @@ class ClothingController extends Controller
         $clothing->category = request('category');
         $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
         $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+
+        $weatherOptions = [];
+        foreach (ClothingWeatherOptions::values() as $option) {
+            $weatherOptions[$option] = $request->has('weather_options.'.$option);
+        }
+        $clothing->weather_options = $weatherOptions;
 
         $clothing->save();
 
@@ -69,7 +76,8 @@ class ClothingController extends Controller
         return view('clothing.edit', [
             'clothing' => $clothing,
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list()
+            'clothingCategories' => ClothingCategory::list(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::list(),
         ]);
     }
 
@@ -79,8 +87,20 @@ class ClothingController extends Controller
         $clothing->name = request('name');
         $clothing->note = request('note');
         $clothing->category = request('category');
-        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
-        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+
+        if($request->has('image_front')) {
+            $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
+        }
+
+        if($request->has('image_front')) {
+            $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+        }
+
+        $weatherOptions = [];
+        foreach (ClothingWeatherOptions::values() as $option) {
+            $weatherOptions[$option] = $request->has('weather_options.'.$option);
+        }
+        $clothing->weather_options = $weatherOptions;
 
         $clothing->save();
 

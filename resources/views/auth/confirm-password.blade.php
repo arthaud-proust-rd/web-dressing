@@ -9,7 +9,7 @@
 
         <h1 class="h1">Confirmer votre mot de passe</h1>
 
-        <livewire:input type="password" name="password" title="Mot de passe"/>
+        <livewire:input type="password" property="password" title="Mot de passe"/>
 
         <button class="btn-primary">
             Confirmer
