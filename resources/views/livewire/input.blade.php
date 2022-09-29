@@ -29,9 +29,9 @@
             </select>
         @elseif($type==="radio-select")
             @if(count($options)>3)
-                <div class="grid grid-cols-2 gap-1 bg-neutral-100 rounded-md">
+                <div class="grid grid-cols-2 gap-1 bg-secondary rounded-md">
             @else
-                <div class="grid grid-flow-col gap-1 bg-neutral-100 rounded-md">
+                <div class="grid grid-flow-col gap-1 bg-secondary rounded-md">
             @endif
                 @foreach($options as $optKey=>$optValue)
                     <div>
@@ -47,9 +47,9 @@
             </div>
         @elseif($type==="checkboxes-group")
             @if(count($options)>3)
-                <div class="grid grid-cols-2 gap-1 bg-neutral-100 rounded-md">
+                <div class="grid grid-cols-2 gap-1 bg-secondary rounded-md">
             @else
-                <div class="grid grid-flow-col gap-1 bg-neutral-100 rounded-md">
+                <div class="grid grid-flow-col gap-1 bg-secondary rounded-md">
             @endif
                 @foreach($options as $optKey=>$optValue)
                     <livewire:input :bind="$bind" :property="$optValue" :nestedIn="$name" :title="$optKey" type="checkbox-button" />

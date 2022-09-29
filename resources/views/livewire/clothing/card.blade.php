@@ -1,4 +1,4 @@
-<div class="card p-0 gap-0">
+<div class="card p-0 gap-0 snap-start">
     <livewire:clothing.image :clothing="$clothing"/>
     <a class="p-4" href="{{ route('clothing.show', $clothing->id) }}">
         <span class="text-sm text-gray-400">Noté {{ $clothing->note }}/3</span>

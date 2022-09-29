@@ -20,7 +20,6 @@ class DressingSeeder extends Seeder
         foreach (User::all() as $user){
             foreach (City::all() as $city) {
                 Dressing::factory()
-                    ->count(2)
                     ->hasClothes(6)
                     ->for($city)
                     ->for($user)

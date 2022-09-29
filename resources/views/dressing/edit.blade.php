@@ -1,16 +1,20 @@
 <x-app-layout>
     <h1 class="h1">Modifier le dressing {{ $dressing->name }}</h1>
-    <form
-        action="{{ route('dressing.destroy', $dressing) }}"
-        method="post"
-        class="flex flex-col gap-4 mt-4"
-    >
-        @csrf
-        @method('DELETE')
-        <button class="btn-danger ml-auto">
-            <x-icon.trash/>
-        </button>
-    </form>
+    <div class="mb-10 flex flex-wrap justify-between">
+        <a class="btn-secondary" href="{{ route('dressing.show', $dressing) }}">Retour au dressing</a>
+        <form
+            action="{{ route('dressing.destroy', $dressing) }}"
+            method="post"
+            class="flex flex-col gap-4"
+        >
+            @csrf
+            @method('DELETE')
+            <button class="btn-danger ml-auto">
+                <x-icon.trash/>
+            </button>
+        </form>
+    </div>
+
     <form
         action="{{ route('dressing.update', $dressing) }}"
         method="post"
@@ -31,6 +35,12 @@
         @endif
 
         <livewire:input type="text" property="name" title="Nom" :bind="$dressing"/>
+
+        <livewire:input type="select"
+                        property="city_id"
+                        title="Ville"
+                        :bind="$dressing"
+                        :options="$cities->pluck('id', 'name')->toArray()"/>
 
         <input class="btn-primary" type="submit" value="Enregistrer"/>
 

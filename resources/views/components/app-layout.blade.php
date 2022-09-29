@@ -11,11 +11,11 @@
 
         @vite('resources/css/app.css')
         @livewireStyles
-        <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet">
-        <link
-            href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-            rel="stylesheet"
-        />
+{{--        <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet">--}}
+{{--        <link--}}
+{{--            href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"--}}
+{{--            rel="stylesheet"--}}
+{{--        />--}}
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
@@ -31,17 +31,17 @@
 
         @livewireScripts
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+{{--        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>--}}
+{{--        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>--}}
 
-        <!-- Turn all file input elements into ponds -->
-        <script>
-            FilePond.registerPlugin(
-                FilePondPluginImagePreview,
-            );
+{{--        <!-- Turn all file input elements into ponds -->--}}
+{{--        <script>--}}
+{{--            FilePond.registerPlugin(--}}
+{{--                FilePondPluginImagePreview,--}}
+{{--            );--}}
 
-            FilePond.parse(document.body);
-        </script>
+{{--            FilePond.parse(document.body);--}}
+{{--        </script>--}}
 
     </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ClothingCategory;
 use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
+use App\Models\City;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,9 @@ class DressingController extends Controller
 
     public function create()
     {
-        return view('dressing.create');
+        return view('dressing.create', [
+            'cities' => City::all(),
+        ]);
     }
 
     public function store(StoreDressingRequest $request)
@@ -34,6 +37,7 @@ class DressingController extends Controller
         $dressing = new Dressing;
 
         $dressing->name = request('name');
+        $dressing->city_id = request('city_id');
         $dressing->user_id = $request->user()->id;
 
         $dressing->save();
@@ -54,13 +58,15 @@ class DressingController extends Controller
     public function edit(Dressing $dressing)
     {
         return view('dressing.edit',  [
-            'dressing' => $dressing
+            'dressing' => $dressing,
+            'cities' => City::all(),
         ]);
     }
 
     public function update(UpdateDressingRequest $request, Dressing $dressing)
     {
         $dressing->name = request('name');
+        $dressing->city_id = request('city_id');
 
         $dressing->save();
 

@@ -55,7 +55,10 @@ class CityService
         $request_dt = now()->toDateTimeString();
         foreach ($this->fetchedWeatherForecasts as $forecast)
         {
-//            dd($forecast);
+            if(!str_ends_with($forecast['dt_txt'], '09:00:00') && !str_ends_with($forecast['dt_txt'], '15:00:00')){
+                continue;
+            }
+
             WeatherForecast::factory()
                 ->for($this->instance)
                 ->create([

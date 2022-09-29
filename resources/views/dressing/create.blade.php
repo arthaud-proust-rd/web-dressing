@@ -1,5 +1,8 @@
 <x-app-layout>
     <h1 class="h1">Créer un dressing</h1>
+    <div class="mb-10 flex flex-wrap justify-between">
+        <a class="btn-secondary" href="{{ route('dressing.index') }}">Retour aux dressings</a>
+    </div>
     <form
         action="{{ route('dressing.store') }}"
         method="post"
@@ -20,6 +23,11 @@
         @endif
 
         <livewire:input type="text" property="name" title="Nom"/>
+
+        <livewire:input type="select"
+                        property="city_id"
+                        title="Ville"
+                        :options="$cities->pluck('id', 'name')->toArray()"/>
 
         <input class="btn-primary" type="submit" value="Enregistrer"/>
 
