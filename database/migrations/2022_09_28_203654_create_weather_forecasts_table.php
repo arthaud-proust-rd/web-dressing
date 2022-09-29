@@ -20,16 +20,16 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
             $table->string('description');
-            $table->smallInteger('temp');           // C°
-            $table->smallInteger('temp_feels');     // C°
-            $table->smallInteger('temp_min');       // C°
-            $table->smallInteger('temp_max');       // C°
-            $table->smallInteger('precip');         // mm: Precipitation level
+            $table->double('temp', 4, 2);           // C°
+            $table->double('temp_feels', 4, 2);     // C°
+            $table->double('temp_min', 4, 2);       // C°
+            $table->double('temp_max', 4, 2);       // C°
+            $table->double('precip', 4, 2);         // mm: Precipitation level
             $table->smallInteger('precip_proba');   // %: Precipitation probability (pop)
             $table->smallInteger('humidity');       // %
             $table->smallInteger('cloudcover');     // %
-            $table->timestamp('request_dt');                 // Datetime timestamp ISO UTC (dt_txt)
             $table->timestamp('forecast_dt');                // Datetime timestamp ISO UTC (dt_txt)
+            $table->timestamp('request_dt');                 // Datetime timestamp ISO UTC (dt_txt)
         });
     }
 

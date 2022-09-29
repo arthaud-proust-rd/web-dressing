@@ -52,6 +52,7 @@ class CityService
 
     public function storeFetchedWeatherForecasts(): static
     {
+        $request_dt = now()->toDateTimeString();
         foreach ($this->fetchedWeatherForecasts as $forecast)
         {
 //            dd($forecast);
@@ -64,10 +65,10 @@ class CityService
                     'temp_min' => $forecast['main']['temp_min'],
                     'temp_max' => $forecast['main']['temp_max'],
                     'precip' => $forecast['rain']['3h'] ?? 0,
-                    'precip_proba' => $forecast['pop'] ?? 0,
-                    'humidity' => $forecast['main']['humidity'] ?? 0,
+                    'precip_proba' => 100 * ($forecast['pop'] ?? 0),
+                    'humidity' => ($forecast['main']['humidity'] ?? 0),
                     'cloudcover' => $forecast['clouds']['all'] ?? 0,
-                    'request_dt' => $forecast['dt_txt'], // TODO bon timestamp
+                    'request_dt' => $request_dt,
                     'forecast_dt' => $forecast['dt_txt'],
                 ]);
         }
