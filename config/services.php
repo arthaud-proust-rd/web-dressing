@@ -31,8 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'weatherstack' => [
-        'host' => env('WEATHERSTACK_HOST'),
-        'key' => env('WEATHERSTACK_ACCESS_KEY'),
+    'openweather' => [
+        'host' => env('OPENWEATHER_HOST'),
+        'key' => env('OPENWEATHER_KEY'),
     ],
 ];

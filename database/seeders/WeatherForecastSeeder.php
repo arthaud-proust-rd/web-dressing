@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WeatherPrevisionSeeder extends Seeder
+class WeatherForecastSeeder extends Seeder
 {
     /**
      * Run the database seeds.

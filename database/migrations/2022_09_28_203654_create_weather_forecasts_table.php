@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('weather_previsions', function (Blueprint $table) {
+        Schema::create('weather_forecasts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')
                 ->constrained()
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weather_previsions');
+        Schema::dropIfExists('weather_forecasts');
     }
 };
