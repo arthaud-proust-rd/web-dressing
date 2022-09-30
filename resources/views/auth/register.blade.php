@@ -8,10 +8,10 @@
 
         <h1 class="h1">Créer un compte</h1>
 
-        <livewire:input type="text" name="name" title="Nom"/>
-        <livewire:input type="text" name="email" title="Email"/>
-        <livewire:input type="password" name="password" title="Mot de passe"/>
-        <livewire:input type="password" name="password_confirmation" title="Confirmer le mot de passe"/>
+        <livewire:input type="text" property="name" title="Nom"/>
+        <livewire:input type="text" property="email" title="Email"/>
+        <livewire:input type="password" property="password" title="Mot de passe"/>
+        <livewire:input type="password" property="password_confirmation" title="Confirmer le mot de passe"/>
 
         <button class="btn-primary">
             Créer un compte

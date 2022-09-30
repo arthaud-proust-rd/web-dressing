@@ -24,7 +24,8 @@ class StoreDressingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required']
+            'name' => ['required'],
+            'city_id' => ['required', 'exists:cities,id'],
         ];
     }
 }

@@ -20,10 +20,12 @@ class Clothing extends Model
         'category',
         'image_front',
         'image_back',
+        'weather_options'
     ];
 
     protected $casts = [
         'dressing_id' => 'int',
+        'weather_options' => 'array'
     ];
 
     public function dressing(): BelongsTo
@@ -48,5 +50,14 @@ class Clothing extends Model
     public function scopeCategoryInt($query, int $category)
     {
         return $query->where('category', $category);
+    }
+
+    public function scopeWeatherOptions($query, Array $options)
+    {
+        $q = $query;
+        foreach($options as $option=>$value) {
+            $q = $query->where('weather_options->'.$option, $value);
+        }
+        return $q;
     }
 }
