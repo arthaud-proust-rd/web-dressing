@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class DayCard extends Component
 {
-    public Collection $dayForecasts;
+    public Collection $dayForecast;
 
     public function render()
     {

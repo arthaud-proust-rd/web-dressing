@@ -21,7 +21,7 @@
 {{--        <div x-show="areFiltersOpen" class="flex flex-wrap gap-2"></div>--}}
     </div>
 
-    <livewire:dressing.weather :dressing="$dressing" />
+    <livewire:dressing.weather-suggestions :dressing="$dressing" />
 
     @if($view === "grid")
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 my-6">
