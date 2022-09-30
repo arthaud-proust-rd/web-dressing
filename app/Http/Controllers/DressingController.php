@@ -11,6 +11,8 @@ use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DressingController extends Controller
 {
@@ -18,16 +20,16 @@ class DressingController extends Controller
     {
         $this->authorizeResource(Dressing::class, 'dressing');
     }
-    public function index(): View
+    public function index(): Response
     {
-        return view('dressing.index', [
-            'dressings' => Auth::user()->dressings
+        return Inertia::render('Dressing/Index', [
+            'dressings' => Auth::user()->dressings->toArray()
         ]);
     }
 
     public function create()
     {
-        return view('dressing.create', [
+        return Inertia::render('dressing.create', [
             'cities' => City::all(),
         ]);
     }
@@ -47,9 +49,9 @@ class DressingController extends Controller
         return redirect()->route('dressing.show', $dressing->id);
     }
 
-    public function show(Dressing $dressing): View
+    public function show(Dressing $dressing): Response
     {
-        return view('dressing.show', [
+        return Inertia::render('Dressing/Show', [
             'dressing' => $dressing,
             'categories' => ClothingCategory::list()
         ]);

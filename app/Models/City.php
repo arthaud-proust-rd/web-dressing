@@ -17,6 +17,10 @@ class City extends Model
         'lon',
     ];
 
+    protected $appends = [
+      'days_weather_forecasts'
+    ];
+
     public function dressings(): HasMany
     {
         return $this->hasMany(Dressing::class);

@@ -23,6 +23,14 @@ class WeatherForecast extends Model
         'forecast_dt' => 'datetime',
     ];
 
+    protected $appends = [
+        'date',
+        'hour',
+        'day_part',
+        'is_rainy',
+        'is_cold',
+    ];
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
@@ -32,9 +40,15 @@ class WeatherForecast extends Model
     {
         return $this->forecast_dt->translatedFormat('l j F');
     }
-    public function getTimeAttribute()
+
+    public function getHourAttribute()
     {
-        return $this->forecast_dt->translatedFormat('H:i');
+        return $this->forecast_dt->translatedFormat('H');
+    }
+
+    public function getDayPartAttribute()
+    {
+        return $this->forecast_dt->hour<12?'Matin':'Après-Midi';
     }
 
     public function getDateTimeAttribute()
@@ -42,14 +56,9 @@ class WeatherForecast extends Model
         return $this->forecast_dt;
     }
 
-    public function getIsSunnyAttribute(): bool
-    {
-        return $this->temp >= 15 && $this->cloudcover < 60;
-    }
-
     public function getIsRainyAttribute(): bool
     {
-        return $this->humidity > 60 && $this->precip_proba > 30;
+        return $this->precip_proba > 30;
     }
 
     public function getIsColdAttribute(): bool
