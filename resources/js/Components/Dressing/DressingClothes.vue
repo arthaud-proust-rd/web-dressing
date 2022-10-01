@@ -24,6 +24,10 @@ export default {
             showWeather: true,
         }
     },
+    updated() {
+        console.log(this.categories);
+        console.log(this.dressing);
+    },
     methods: {
         clothesOfCategory(categoryInt) {
             return this.orderedClothes(
