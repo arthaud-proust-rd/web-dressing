@@ -33,4 +33,4 @@ jobs:
           git add .
           git commit -m "build"
           git checkout -b release/stagging
-          git push
+          git push --force
