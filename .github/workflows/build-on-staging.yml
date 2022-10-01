@@ -32,5 +32,5 @@ jobs:
           git config push.default current
           git add .
           git commit -m "build"
-          git checkout -b release/stagging
+          git checkout -b release/staging
           git push --force
