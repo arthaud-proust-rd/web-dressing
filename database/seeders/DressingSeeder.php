@@ -20,9 +20,11 @@ class DressingSeeder extends Seeder
         foreach (User::all() as $user){
             foreach (City::all() as $city) {
                 Dressing::factory()
-                    ->hasClothes(20)
                     ->for($city)
                     ->for($user)
+                    ->sequence(fn ($sequence) => [
+                        'name' => 'Seq '.$sequence->index
+                    ])
                     ->create();
             }
         }
