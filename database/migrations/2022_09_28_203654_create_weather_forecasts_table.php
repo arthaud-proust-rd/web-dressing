@@ -28,8 +28,8 @@ return new class extends Migration
             $table->smallInteger('precip_proba');   // %: Precipitation probability (pop)
             $table->smallInteger('humidity');       // %
             $table->smallInteger('cloudcover');     // %
-            $table->timestamp('forecast_dt');                // Datetime timestamp ISO UTC (dt_txt)
-            $table->timestamp('request_dt');                 // Datetime timestamp ISO UTC (dt_txt)
+            $table->timestamp('forecast_dt')->nullable();                // Datetime timestamp ISO UTC (dt_txt)
+            $table->timestamp('request_dt')->nullable();                 // Datetime timestamp ISO UTC (dt_txt)
         });
     }
 

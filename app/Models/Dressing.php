@@ -23,6 +23,15 @@ class Dressing extends Model
         'user_id' => 'int',
     ];
 
+    protected $with = [
+        'city.weatherForecasts',
+        'clothes',
+    ];
+
+    protected $appends = [
+        'clothes_categories_stats'
+    ];
+
     public function clothes(): HasMany
     {
         return $this->hasMany(Clothing::class);
@@ -44,7 +53,7 @@ class Dressing extends Model
         foreach (ClothingCategory::cases() as $category)
         {
             $stats[] = [
-                'class' => $category,
+                'name' => $category->toString(),
                 'count' => $this->clothes()->category($category)->count()
             ];
         }
