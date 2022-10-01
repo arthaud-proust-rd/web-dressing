@@ -1,6 +1,6 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.2b09b7d2.js",
+    "file": "assets/app.d40d5043.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -20,137 +20,137 @@
     ]
   },
   "resources/js/Pages/Auth/ConfirmPassword.vue": {
-    "file": "assets/ConfirmPassword.b75cc9a5.js",
+    "file": "assets/ConfirmPassword.fe6d5d33.js",
     "src": "resources/js/Pages/Auth/ConfirmPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_TextInput.1630c0cc.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_TextInput.9068026c.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
-  "_PrimaryButton.b4d46a24.js": {
-    "file": "assets/PrimaryButton.b4d46a24.js",
+  "_PrimaryButton.72ca0682.js": {
+    "file": "assets/PrimaryButton.72ca0682.js",
     "imports": [
-      "_ApplicationLogo.74e57b7c.js",
+      "_ApplicationLogo.88c1d252.js",
       "resources/js/app.js"
     ]
   },
-  "_TextInput.1630c0cc.js": {
-    "file": "assets/TextInput.1630c0cc.js",
+  "_TextInput.9068026c.js": {
+    "file": "assets/TextInput.9068026c.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
-  "_ApplicationLogo.74e57b7c.js": {
-    "file": "assets/ApplicationLogo.74e57b7c.js",
+  "_ApplicationLogo.88c1d252.js": {
+    "file": "assets/ApplicationLogo.88c1d252.js",
     "imports": [
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Auth/ForgotPassword.vue": {
-    "file": "assets/ForgotPassword.1bed857f.js",
+    "file": "assets/ForgotPassword.5d1ca598.js",
     "src": "resources/js/Pages/Auth/ForgotPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_TextInput.1630c0cc.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_TextInput.9068026c.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Auth/Login.vue": {
-    "file": "assets/Login.41f15be1.js",
+    "file": "assets/Login.0fcd6d91.js",
     "src": "resources/js/Pages/Auth/Login.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_TextInput.1630c0cc.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_TextInput.9068026c.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Auth/Register.vue": {
-    "file": "assets/Register.2b7bb7f7.js",
+    "file": "assets/Register.fdc56c70.js",
     "src": "resources/js/Pages/Auth/Register.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_TextInput.1630c0cc.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_TextInput.9068026c.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.vue": {
-    "file": "assets/ResetPassword.f228bdcc.js",
+    "file": "assets/ResetPassword.fe4dd4c7.js",
     "src": "resources/js/Pages/Auth/ResetPassword.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_TextInput.1630c0cc.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_TextInput.9068026c.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Auth/VerifyEmail.vue": {
-    "file": "assets/VerifyEmail.7536eba8.js",
+    "file": "assets/VerifyEmail.1d0ce3a1.js",
     "src": "resources/js/Pages/Auth/VerifyEmail.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_PrimaryButton.b4d46a24.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_PrimaryButton.72ca0682.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Dashboard.vue": {
-    "file": "assets/Dashboard.56e28b44.js",
+    "file": "assets/Dashboard.9bac5835.js",
     "src": "resources/js/Pages/Dashboard.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.cf4fedb6.js",
+      "_AuthenticatedLayout.79d93505.js",
       "resources/js/app.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
-  "_AuthenticatedLayout.cf4fedb6.js": {
-    "file": "assets/AuthenticatedLayout.cf4fedb6.js",
+  "_AuthenticatedLayout.79d93505.js": {
+    "file": "assets/AuthenticatedLayout.79d93505.js",
     "imports": [
-      "_ApplicationLogo.74e57b7c.js",
+      "_ApplicationLogo.88c1d252.js",
       "resources/js/app.js"
     ]
   },
   "resources/js/Pages/Dressing/Index.vue": {
-    "file": "assets/Index.34aa1b19.js",
+    "file": "assets/Index.d6468439.js",
     "src": "resources/js/Pages/Dressing/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_AuthenticatedLayout.cf4fedb6.js",
+      "_AuthenticatedLayout.79d93505.js",
       "resources/js/app.js",
-      "_ClothingImage.f602ba9d.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_ClothingImage.12e43ded.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
-  "_ClothingImage.f602ba9d.js": {
-    "file": "assets/ClothingImage.f602ba9d.js",
+  "_ClothingImage.12e43ded.js": {
+    "file": "assets/ClothingImage.12e43ded.js",
     "imports": [
       "resources/js/app.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Dressing/Show.vue": {
-    "file": "assets/Show.1bd54b6e.js",
+    "file": "assets/Show.71d9d45c.js",
     "src": "resources/js/Pages/Dressing/Show.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_AuthenticatedLayout.cf4fedb6.js",
-      "_ClothingImage.f602ba9d.js",
-      "_ApplicationLogo.74e57b7c.js"
+      "_AuthenticatedLayout.79d93505.js",
+      "_ClothingImage.12e43ded.js",
+      "_ApplicationLogo.88c1d252.js"
     ]
   },
   "resources/js/Pages/Welcome.vue": {
-    "file": "assets/Welcome.afc7a618.js",
+    "file": "assets/Welcome.9aac22a4.js",
     "src": "resources/js/Pages/Welcome.vue",
     "isDynamicEntry": true,
     "imports": [

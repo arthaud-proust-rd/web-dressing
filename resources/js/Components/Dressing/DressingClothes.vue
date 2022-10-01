@@ -30,9 +30,9 @@ export default {
     },
     methods: {
         clothesOfCategory(categoryInt) {
-            return this.orderedClothes(
-                this.dressing.clothes.filter(clothing=>clothing.category===categoryInt)
-            )
+            return this.dressing.clothes.filter(clothing=>clothing.category===categoryInt)
+            // return this.orderedClothes(
+            // )
         },
         orderedClothes(clothes=this.dressing.clothes) {
             return clothes.sort((a,b)=>{
