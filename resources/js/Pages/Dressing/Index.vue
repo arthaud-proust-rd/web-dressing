@@ -22,7 +22,7 @@ const props = defineProps({
 
         <h2 class="h2">Mes dressings</h2>
         <div class="flex flex-wrap gap-2">
-            <a class="btn-primary" href="{{ route('dressing.create') }}">Créer un dressing</a>
+            <a class="btn-primary" :href="route('dressing.create')">Créer un dressing</a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
             <DressingCard
