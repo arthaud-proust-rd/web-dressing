@@ -24,15 +24,11 @@ export default {
             showWeather: true,
         }
     },
-    updated() {
-        console.log(this.categories);
-        console.log(this.dressing);
-    },
     methods: {
         clothesOfCategory(categoryInt) {
-            return this.dressing.clothes.filter(clothing=>clothing.category===categoryInt)
-            // return this.orderedClothes(
-            // )
+            return this.orderedClothes(
+                this.dressing.clothes.filter(clothing=>parseInt(clothing.category)===categoryInt)
+            )
         },
         orderedClothes(clothes=this.dressing.clothes) {
             return clothes.sort((a,b)=>{
