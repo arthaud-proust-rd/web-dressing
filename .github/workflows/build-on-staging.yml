@@ -11,19 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - continue-on-error: true
-        run: |
+      - run: |
           composer install
           npm install
           git config user.name github-actions
           git config user.email github-actions@github.com
           git config push.default current
           git checkout -b release/staging
-          git pull origin release/staging
           npm run build
           git add .
           git commit -m "build"
-          git push origin release/staging
+          git push origin release/staging --force
 
   deploy:
     needs: build
