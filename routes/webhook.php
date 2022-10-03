@@ -19,7 +19,11 @@ use App\Http\Controllers\ClothingController;
 */
 
 
-Route::post('/pull', function () {
+Route::get('/pull', static function () {
     return Artisan::call('webhook:pull');
-})->name('pull');
+});
+
+Route::post('/pull', static function () {
+    return Artisan::call('webhook:pull');
+});
 
