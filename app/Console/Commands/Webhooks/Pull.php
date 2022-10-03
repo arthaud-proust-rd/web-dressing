@@ -4,6 +4,7 @@ namespace App\Console\Commands\Webhooks;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Process\Process;
 
 class Pull extends Command
 {
@@ -28,7 +29,7 @@ class Pull extends Command
      */
     public function handle()
     {
-
+        $process = Process::fromShellCommandline('git pull');
         return 0;
     }
 }
