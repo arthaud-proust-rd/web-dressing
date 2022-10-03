@@ -18,7 +18,7 @@ jobs:
           git config user.email github-actions@github.com
           git config push.default current
           git checkout -b release/staging
-          git pull -u origin release/staging
+          git pull origin release/staging
           npm run build
           git add .
           git commit -m "build"
