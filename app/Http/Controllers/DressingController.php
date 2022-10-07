@@ -29,7 +29,7 @@ class DressingController extends Controller
 
     public function create()
     {
-        return Inertia::render('dressing.create', [
+        return Inertia::render('Dressing/CreateOrEdit', [
             'cities' => City::all(),
         ]);
     }
@@ -59,7 +59,7 @@ class DressingController extends Controller
 
     public function edit(Dressing $dressing)
     {
-        return view('dressing.edit',  [
+        return Inertia::render('Dressing/CreateOrEdit', [
             'dressing' => $dressing,
             'cities' => City::all(),
         ]);

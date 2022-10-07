@@ -1,6 +1,6 @@
 <script setup >
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Link, Head } from '@inertiajs/inertia-vue3';
 import DressingCard from "@/Components/Dressing/DressingCard.vue";
 
 const props = defineProps({
@@ -22,7 +22,7 @@ const props = defineProps({
 
         <h2 class="h2">Mes dressings</h2>
         <div class="flex flex-wrap gap-2">
-            <a class="btn-primary" :href="route('dressing.create')">Créer un dressing</a>
+            <Link class="btn-primary" :href="route('dressing.create')">Créer un dressing</Link>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-4">
             <DressingCard

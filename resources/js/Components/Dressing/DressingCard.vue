@@ -1,13 +1,10 @@
-<script>
+<script setup>
 import ClothingImage from "@/Components/Clothing/ClothingImage.vue";
-export default {
-    components: {
-      ClothingImage
-    },
-    props: {
-      dressing: Object
-    }
-}
+import { Link } from '@inertiajs/inertia-vue3';
+
+defineProps({
+  dressing: Object
+})
 </script>
 <template>
     <div class="card">
@@ -16,7 +13,7 @@ export default {
                 v-for="clothing of dressing.clothes.slice(-3)"
                 :clothing="clothing"/>
         </div>
-        <a class="flex flex-col gap-2" :href="route('dressing.show', dressing)">
+        <Link class="flex flex-col gap-2" :href="route('dressing.show', dressing)">
             <h3 class="text-2xl -mb-3">
                 {{ dressing.name }}
             </h3>
@@ -32,6 +29,6 @@ export default {
                     </li>
                 </template>
             </ul>
-        </a>
+        </Link>
     </div>
 </template>
