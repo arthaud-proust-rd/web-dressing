@@ -10,12 +10,13 @@ use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use App\Helpers\OptimizedImage;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ClothingController extends Controller
 {
@@ -31,13 +32,13 @@ class ClothingController extends Controller
         ]);
     }
 
-    public function create(?Dressing $dressing): View
+    public function create(?Dressing $dressing): Response
     {
-        return view('clothing.create', [
+        return Inertia::render('Clothing/CreateOrEdit', [
             'selectedDressing' => $dressing,
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list(),
-            'clothingWeatherOptions' => ClothingWeatherOptions::list(),
+            'clothingCategories' => ClothingCategory::array(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::array(),
         ]);
     }
 
@@ -64,20 +65,20 @@ class ClothingController extends Controller
         return redirect()->route('dressing.show', $clothing->dressing_id);
     }
 
-    public function show(Clothing $clothing): View
+    public function show(Clothing $clothing): Response
     {
-        return view('clothing.show', [
+        return Inertia::render('Clothing/Show', [
             'clothing' => $clothing,
         ]);
     }
 
-    public function edit(Clothing $clothing): View
+    public function edit(Clothing $clothing): Response
     {
-        return view('clothing.edit', [
+        return Inertia::render('Clothing/CreateOrEdit', [
             'clothing' => $clothing,
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list(),
-            'clothingWeatherOptions' => ClothingWeatherOptions::list(),
+            'clothingCategories' => ClothingCategory::array(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::array(),
         ]);
     }
 

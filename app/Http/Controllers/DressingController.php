@@ -23,7 +23,7 @@ class DressingController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dressing/Index', [
-            'dressings' => Auth::user()->dressings->toArray()
+            'dressings' => Auth::user()->dressings
         ]);
     }
 
@@ -53,7 +53,7 @@ class DressingController extends Controller
     {
         return Inertia::render('Dressing/Show', [
             'dressing' => $dressing,
-            'categories' => ClothingCategory::list()
+            'categories' => ClothingCategory::associativeArray()
         ]);
     }
 

@@ -18,9 +18,9 @@ defineProps({
             <h4 v-if="clothing.name" class="text-xl">{{ clothing.name }}</h4>
         </Link>
         <div v-if="showActions" class="flex flex-col gap-2 px-2 pb-2">
-            <a class="btn-primary" href="{{ route('clothing.edit', clothing) }}">
+            <Link class="btn-primary" :href="route('clothing.edit', clothing)">
                 Modifier
-            </a>
+            </Link>
         </div>
     </div>
 </template>

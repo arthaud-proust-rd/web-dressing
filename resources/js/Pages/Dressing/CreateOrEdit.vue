@@ -41,10 +41,10 @@ export default {
             this.form.post(this.route('dressing.store'))
         },
         submitUpdate() {
-            this.form.put(this.route('dressing.update',{dressing: this.dressing.id}))
+            this.form.put(this.route('dressing.update', this.dressing.id ))
         },
         submitDelete() {
-            this.form.delete(this.route('dressing.destroy',{dressing: this.dressing.id}))
+            this.form.delete(this.route('dressing.destroy', this.dressing.id ))
         },
     },
     computed: {
@@ -71,7 +71,7 @@ export default {
         </div>
 
         <div class="flex items-center justify-between mt-4">
-            <Link class="text-gray-400 mb-3" :href="route('dressing.index')">Retour à la liste des dressings</Link>
+            <Link class="text-gray-400 mb-3" href="#" onclick="history.back();return false;">Retour</Link>
             <PrimaryButton v-if="!isCreating" class="ml-4 btn-danger" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" @click="submitDelete">
                 Supprimer
             </PrimaryButton>

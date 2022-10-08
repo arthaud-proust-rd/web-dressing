@@ -17,12 +17,26 @@ enum ClothingWeatherOptions: string
         };
     }
 
-    public static function list(): array
+    public static function associativeArray(): array
     {
         $list = [];
         foreach (self::cases() as $category)
         {
             $list[$category->toString()] = $category->value;
+        }
+
+        return $list;
+    }
+
+    public static function array(): array
+    {
+        $list = [];
+        foreach (self::cases() as $category)
+        {
+            $list[] = [
+                'label' => $category->toString(),
+                'value' =>$category->value
+            ];
         }
 
         return $list;
