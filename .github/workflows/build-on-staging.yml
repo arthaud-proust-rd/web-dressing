@@ -32,4 +32,3 @@ jobs:
         env:
           webhook_url: ${{ secrets.STAGING_DEPLOY_URL }}
           webhook_secret: ${{ secrets.STAGING_DEPLOY_SECRET }}
-}}
