@@ -19,7 +19,7 @@ class Deploy extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Deploy application';
 
     /**
      * Execute the console command.
@@ -29,7 +29,7 @@ class Deploy extends Command
     public function handle()
     {
         $root_path = base_path();
-        $process = new Process('cd ' . $root_path . '; ./deploy.sh');
+        $process = new Process([$root_path.'/deploy.sh']);
         $process->run(function ($type, $buffer) {
             echo $buffer;
         });
