@@ -1,11 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use App\Http\Controllers\DressingController;
-use App\Http\Controllers\ClothingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +16,7 @@ use App\Http\Controllers\ClothingController;
 
 
 
-Route::post('/pull', static function () {
-    return Artisan::call('webhook:pull');
+Route::post('/deploy', static function () {
+    return Artisan::call('webhook:deploy');
 });
 

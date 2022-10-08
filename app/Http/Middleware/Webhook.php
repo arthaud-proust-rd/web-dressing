@@ -8,13 +8,6 @@ use Symfony\Component\Process\Process;
 
 class Webhook
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
     public function handle(Request $request, Closure $next)
     {
         $githubPayload = $request->getContent();
@@ -24,8 +17,8 @@ class Webhook
 
         if (hash_equals($githubHash, $localHash)) {
             abort(403);
-
         }
+
         return $next($request);
     }
 }
