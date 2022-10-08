@@ -28,6 +28,7 @@ class Deploy extends Command
      */
     public function handle()
     {
+        
         $root_path = base_path();
         $process = new Process([$root_path.'/deploy.sh']);
         $process->run(function ($type, $buffer) {
