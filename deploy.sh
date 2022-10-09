@@ -1,4 +1,11 @@
 #!/bin/sh
+
+# create an alias for composer
+shopt -s expand_aliases
+alias composer=/opt/cpanel/composer/bin/composer
+readonly HOME=/home/sc1nxot8532
+export HOME
+
 # activate maintenance mode
 php artisan down
 # update source code
