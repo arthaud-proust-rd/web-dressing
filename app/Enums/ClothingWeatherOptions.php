@@ -5,23 +5,24 @@ namespace App\Enums;
 enum ClothingWeatherOptions: string
 {
     case Rainy = 'rainy';
-    case Sunny = 'sunny';
+    case Dry = 'dry';
     case Cold = 'cold';
+    case Hot = 'hot';
 
     public function toString(): string
     {
-        return match($this) {
+        return match ($this) {
             self::Rainy => 'Pluvieux',
-            self::Sunny => 'Ensoleillé',
+            self::Dry => 'Sec',
             self::Cold => 'Froid',
+            self::Hot => 'Chaud',
         };
     }
 
     public static function associativeArray(): array
     {
         $list = [];
-        foreach (self::cases() as $category)
-        {
+        foreach (self::cases() as $category) {
             $list[$category->toString()] = $category->value;
         }
 
@@ -31,11 +32,10 @@ enum ClothingWeatherOptions: string
     public static function array(): array
     {
         $list = [];
-        foreach (self::cases() as $category)
-        {
+        foreach (self::cases() as $category) {
             $list[] = [
                 'label' => $category->toString(),
-                'value' =>$category->value
+                'value' => $category->value
             ];
         }
 

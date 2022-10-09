@@ -47,7 +47,7 @@ class ClothingController extends Controller
             ->setName($request->name)
             ->setCategory($request->category)
             ->setNote($request->note)
-            ->setWeatherOptions(['rainy']);
+            ->setWeatherOptionsFromAssociative($request->weather_options);
 
         if ($request->image_front) {
             $clothingService->setImageFront($request->image_front);
@@ -88,30 +88,25 @@ class ClothingController extends Controller
 
     public function update(UpdateClothingRequest $request, Clothing $clothing): RedirectResponse
     {
-        $clothing->dressing_id = request('dressing_id');
-        $clothing->name = request('name');
-        $clothing->note = request('note');
-        $clothing->category = request('category');
+        $clothingService = (new ClothingService($clothing))
+            ->setDressingId($request->dressing_id)
+            ->setName($request->name)
+            ->setCategory($request->category)
+            ->setNote($request->note)
+            ->setWeatherOptionsFromAssociative($request->weather_options);
 
-        if ($request->has('image_front')) {
-            $clothing->image_front = OptimizedFilePondImage::getPath($request->file('image_front'));
+        if ($request->image_front) {
+            $clothingService->setImageFront($request->image_front);
+        }
+        if ($request->image_back) {
+            $clothingService->setImageFront($request->image_back);
         }
 
-        if ($request->has('image_front')) {
-            $clothing->image_back = OptimizedFilePondImage::getPath($request->file('image_back'));
-        }
-
-        $weatherOptions = [];
-        foreach (ClothingWeatherOptions::values() as $option) {
-            $weatherOptions[$option] = $request->has('weather_options.' . $option);
-        }
-        $clothing->weather_options = $weatherOptions;
-
-        $clothing->save();
+        $clothingService->save();
 
         session()->flash('status', 'Vêtement modifié');
 
-        return redirect()->route('dressing.show', request('dressing_id'));
+        return redirect()->route('dressing.show', $request->dressing_id);
     }
 
     public function destroy(Request $request, Clothing $clothing): RedirectResponse

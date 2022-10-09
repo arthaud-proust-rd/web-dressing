@@ -75,7 +75,19 @@ class ClothingService
         }
 
         $this->instance->weather_options = $wo;
-        
+
+        return $this;
+    }
+
+    public function setWeatherOptionsFromAssociative(array $weatherOptions): static
+    {
+        $wo = [];
+        foreach (ClothingWeatherOptions::values() as $option) {
+            $wo[$option] = array_key_exists($option, $weatherOptions) && (bool)$weatherOptions[$option];
+        }
+
+        $this->instance->weather_options = $wo;
+
         return $this;
     }
 
