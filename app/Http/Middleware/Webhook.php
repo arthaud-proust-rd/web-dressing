@@ -10,7 +10,7 @@ class Webhook
 {
     public function handle(Request $request, Closure $next)
     {
-        dd($request);
+        echo($request->getContent());
         $githubPayload = $request->getContent();
         $githubHash = $request->header('X-Hub-Signature');
         $localToken = config('app.deploy_secret');
