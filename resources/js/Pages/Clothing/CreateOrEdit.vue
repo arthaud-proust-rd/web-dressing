@@ -7,15 +7,18 @@ import TextInput from '@/Components/Form/TextInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import Select from "@/Components/Form/Select.vue";
-import vueFilePond from "vue-filepond";
+import vueFilePond, { setOptions } from "vue-filepond";
 import "filepond/dist/filepond.min.css";
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 
 // Import the plugin styles
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 const FilePond = vueFilePond(
-    FilePondPluginImagePreview
+    FilePondPluginImagePreview,
+    FilePondPluginFileValidateType,
 );
+
 
 export default {
     components: {
@@ -39,18 +42,42 @@ export default {
     },
     data() {
         return {
-            files: [],
             form: this.$inertia.form({
                 dressing_id: this.clothing?.dressing.id || this.dressings[0].id,
                 name: this.clothing?.name || '',
                 note: this.clothing?.note || 1,
                 category: this.clothing?.category || this.clothingCategories[0].value,
-                image_front: [],
-                image_back: [],
+                image_front: null,
+                image_back: null,
             }),
         }
     },
     methods: {
+        handleFPInit() {
+            setOptions({
+                server: {
+                    url: '/filepond/api',
+                    process: '/process',
+                    revert: '/process',
+                    patch: "?patch=",
+                    headers: {
+                        'X-CSRF-TOKEN': this.$page.props.csrf_token
+                    }
+                }
+            });
+        },
+        handleFPImageFaceProcess: function (error, file) {
+            this.form.image_front = file.serverId;
+        },
+        handleFPImageFaceRemove: function (error, file) {
+            this.form.image_front = null;
+        },
+        handleFPImageBackProcess: function (error, file) {
+            this.form.image_front = file.serverId;
+        },
+        handleFPImageBackRemove: function (error, file) {
+            this.form.image_back = null;
+        },
         submit() {
             this.isCreating ? this.submitCreate() : this.submitUpdate();
         },
@@ -127,18 +154,22 @@ export default {
             <div>
                 <InputLabel for="category" value="Image face" />
                 <FilePond
-                    :instantUpload="false"
-                    name="image_front"
-                    v-model="files"
+                    name="file"
+                    accepted-file-types="image/*"
+                    @init="handleFPInit"
+                    @processfile="handleFPImageFaceProcess"
+                    @removefile="handleFPImageFaceRemove"
                 />
             </div>
 
             <div>
                 <InputLabel for="category" value="Image dos" />
                 <FilePond
-                    :instantUpload="false"
-                    name="image_front"
-                    v-model="form.image_back"
+                    name="file"
+                    accepted-file-types="image/*"
+                    @init="handleFPInit"
+                    @processfile="handleFPImageBackProcess"
+                    @removefile="handleFPImageBackRemove"
                 />
             </div>
 

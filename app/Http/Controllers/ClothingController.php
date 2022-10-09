@@ -8,13 +8,11 @@ use App\Http\Requests\StoreClothingRequest;
 use App\Http\Requests\UpdateClothingRequest;
 use App\Models\Clothing;
 use App\Models\Dressing;
+use App\Services\ClothingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
-use App\Helpers\OptimizedImage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -44,25 +42,31 @@ class ClothingController extends Controller
 
     public function store(StoreClothingRequest $request): RedirectResponse
     {
-        $clothing = new Clothing;
-        $clothing->dressing_id = request('dressing_id');
-        $clothing->name = request('name');
-        $clothing->note = request('note');
-        $clothing->category = request('category');
-        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
-        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+        $clothingService = ClothingService::fromEmpty()
+            ->setDressingId($request->dressing_id)
+            ->setName($request->name)
+            ->setCategory($request->category)
+            ->setNote($request->note)
+            ->setWeatherOptions(['rainy']);
 
-        $weatherOptions = [];
-        foreach (ClothingWeatherOptions::values() as $option) {
-            $weatherOptions[$option] = $request->has('weather_options.'.$option);
+        if ($request->image_front) {
+            $clothingService->setImageFront($request->image_front);
         }
-        $clothing->weather_options = $weatherOptions;
+        if ($request->image_back) {
+            $clothingService->setImageFront($request->image_back);
+        }
 
-        $clothing->save();
+//        $weatherOptions = [];
+//        foreach (ClothingWeatherOptions::values() as $option) {
+//            $weatherOptions[$option] = $request->has('weather_options.' . $option);
+//        }
+//        $clothing->weather_options = $weatherOptions;
+
+        $clothingService->save();
 
         session()->flash('status', 'Vêtement ajouté');
 
-        return redirect()->route('dressing.show', $clothing->dressing_id);
+        return redirect()->route('dressing.show', $clothingService->getInstance()->dressing_id);
     }
 
     public function show(Clothing $clothing): Response
@@ -89,17 +93,17 @@ class ClothingController extends Controller
         $clothing->note = request('note');
         $clothing->category = request('category');
 
-        if($request->has('image_front')) {
-            $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
+        if ($request->has('image_front')) {
+            $clothing->image_front = OptimizedFilePondImage::getPath($request->file('image_front'));
         }
 
-        if($request->has('image_front')) {
-            $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+        if ($request->has('image_front')) {
+            $clothing->image_back = OptimizedFilePondImage::getPath($request->file('image_back'));
         }
 
         $weatherOptions = [];
         foreach (ClothingWeatherOptions::values() as $option) {
-            $weatherOptions[$option] = $request->has('weather_options.'.$option);
+            $weatherOptions[$option] = $request->has('weather_options.' . $option);
         }
         $clothing->weather_options = $weatherOptions;
 

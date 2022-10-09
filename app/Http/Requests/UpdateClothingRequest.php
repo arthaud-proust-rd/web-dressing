@@ -30,6 +30,8 @@ class UpdateClothingRequest extends FormRequest
             'name' => ['nullable', 'string'],
             'note' => ['required', 'between:1,3'],
             'category' => ['required', Rule::in(ClothingCategory::associativeArray())],
+            'image_face' => ['nullable', 'string'],
+            'image_back' => ['nullable', 'string'],
             'weather_options.sunny' => ['nullable'],
             'weather_options.rainy' => ['nullable'],
             'weather_options.cold' => ['nullable'],
