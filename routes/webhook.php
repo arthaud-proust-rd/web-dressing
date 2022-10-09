@@ -20,3 +20,8 @@ Route::post('/deploy', static function () {
     return Artisan::call('webhook:deploy');
 });
 
+Route::post('/test', static function () {
+    return 'ok';
+})->middleware('webhook');
+
+

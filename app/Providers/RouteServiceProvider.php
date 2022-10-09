@@ -34,8 +34,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('api.')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('webhook')
-                ->prefix('webhook')
+            Route::prefix('webhook')
+//                ->middleware('webhook')
                 ->name('webhook.')
                 ->group(base_path('routes/webhook.php'));
 
