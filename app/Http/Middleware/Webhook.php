@@ -10,8 +10,8 @@ class Webhook
 {
     public function handle(Request $request, Closure $next)
     {
-        foreach ($request->headers as $h) {
-            echo $h;
+        foreach ($request->headers as $k=>$h) {
+            echo '------#'.$k.'['.$h[0].']';
         }
 
         $githubPayload = $request->getContent();
