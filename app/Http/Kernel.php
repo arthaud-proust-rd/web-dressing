@@ -45,9 +45,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
-        'webhook' => [
-            \App\Http\Middleware\Webhook::class,
-        ]
+
     ];
 
     /**
@@ -68,5 +66,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'webhook' => \App\Http\Middleware\Webhook::class,
+        'github-webhook' => \App\Http\Middleware\GithubWebHook::class,
     ];
 }

@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::middleware('github-webhook')->group(static function () {
 
-Route::post('/deploy', static function () {
-    return Artisan::call('webhook:deploy');
+    Route::post('/deploy', static function () {
+        return Artisan::call('webhook:deploy');
+    });
+
 });
 
-Route::post('/test', static function () {
-    return 'ok';
-})->middleware('webhook');
 
 
