@@ -10,12 +10,17 @@ class Webhook
 {
     public function handle(Request $request, Closure $next)
     {
-        echo($request->getContent());
+        foreach ($request->headers as $h) {
+            echo $h;
+        }
+
         $githubPayload = $request->getContent();
         $githubHash = $request->header('X-Hub-Signature');
         $localToken = config('app.deploy_secret');
         $localHash = 'sha1=' . hash_hmac('sha1', $githubPayload, $localToken, false);
 
+        echo config('app.deploy_secret');
+        echo hash_equals($githubHash, $localHash);
 //        if (hash_equals($githubHash, $localHash)) {
 //            abort(403);
 //        }
