@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command(FetchWeatherForecast::class)->daily();
+        $schedule->command(FetchWeatherForecast::class)->twiceDaily(1, 12);
     }
 
     /**
