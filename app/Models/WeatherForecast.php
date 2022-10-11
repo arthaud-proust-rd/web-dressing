@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\WeatherForecastDayPart;
+use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class WeatherForecast extends Model
 {
     use HasFactory;
+    use Uuid;
 
     public $timestamps = false;
 
