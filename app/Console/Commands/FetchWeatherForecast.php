@@ -29,11 +29,24 @@ class FetchWeatherForecast extends Command
      */
     public function handle()
     {
-        foreach (City::all() as $city) {
+        $this->info('Fetching weather forecast...');
+
+        $cities = City::all();
+
+        $bar = $this->output->createProgressBar(count($cities));
+
+        $bar->start();
+        foreach ($cities as $city) {
             $cityService = new CityService($city);
 
             $cityService->fetchWeatherForecasts();
+
+            $bar->advance();
         }
+
+        $bar->finish();
+        $this->newLine();
+        $this->info('Fetching ended successfully');
 
         return 0;
     }
