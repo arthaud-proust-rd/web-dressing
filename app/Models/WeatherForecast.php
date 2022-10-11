@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\WeatherForecastDayPart;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,12 +21,13 @@ class WeatherForecast extends Model
 
     protected $casts = [
         'forecast_dt' => 'datetime',
+        'day_part' => WeatherForecastDayPart::class
     ];
 
     protected $appends = [
         'date',
         'hour',
-        'day_part',
+        'day_part_string',
         'is_rainy',
         'is_cold',
     ];
@@ -46,9 +47,9 @@ class WeatherForecast extends Model
         return $this->forecast_dt->translatedFormat('H');
     }
 
-    public function getDayPartAttribute()
+    public function getDayPartStringAttribute(): string
     {
-        return $this->forecast_dt->hour<12?'Matin':'Après-Midi';
+        return $this->day_part->toString();
     }
 
     public function getDateTimeAttribute()
@@ -68,12 +69,11 @@ class WeatherForecast extends Model
 
     public function scopeMornig(Builder $query): Builder
     {
-        return $query->where('forecast_dt', 'like', '%09:00:00');
+        return $query->where('day_part', WeatherForecastDayPart::MORNING);
     }
 
     public function scopeAfternoon(Builder $query): Builder
     {
-        return $query->where('forecast_dt', 'like', '%15:00:00');
+        return $query->where('day_part', WeatherForecastDayPart::AFTERNOON);
     }
-
 }

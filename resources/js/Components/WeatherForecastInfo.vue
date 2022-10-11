@@ -1,5 +1,5 @@
 <script>
-import { ListBulletIcon, Squares2X2Icon } from '@heroicons/vue/24/outline';
+import {ListBulletIcon, Squares2X2Icon} from '@heroicons/vue/24/outline';
 
 export default {
     components: {
@@ -40,8 +40,8 @@ export default {
         <img class="h-20" :src="temperatureImageSrc">
         <div class="flex flex-col items-center">
             <span class="text-3xl">{{ temperature }}°C</span>
-            <span class="text-sky-500">{{ temperatureMin }}°C</span>
-            <span class="text-orange-500">{{ temperatureMax }}°C</span>
+            <!--            <span class="text-sky-500">{{ temperatureMin }}°C</span>-->
+            <!--            <span class="text-orange-500">{{ temperatureMax }}°C</span>-->
         </div>
     </div>
 </template>

@@ -2,6 +2,7 @@
 import ClothingImage from "@/Components/Clothing/ClothingImage.vue";
 import {ArrowLeftIcon, ArrowRightIcon} from '@heroicons/vue/24/outline';
 import WeatherForecastInfo from "@/Components/WeatherForecastInfo.vue";
+
 export default {
     components: {
         ArrowLeftIcon,
@@ -19,6 +20,12 @@ export default {
         }
     },
     mounted() {
+        for (let i = 0; i < this.daysWeatherForecasts.length; i++) {
+            if (Date.now() < new Date(this.daysWeatherForecasts[i].forecast_dt).getTime()) {
+                this.dayIndex = i;
+                break;
+            }
+        }
         this.fetchForecastClothesSuggestions()
     },
     methods: {
@@ -44,10 +51,10 @@ export default {
     },
     computed: {
         canPreviousDay() {
-            return this.dayIndex>0
+            return this.dayIndex > 0
         },
         canNextDay() {
-            return this.dayIndex<this.daysWeatherForecasts.length-1;
+            return this.dayIndex < this.daysWeatherForecasts.length - 1;
         },
         daysWeatherForecasts() {
             // return Object.values(this.dressing.city.days_weather_forecasts)
@@ -71,7 +78,7 @@ export default {
             </button>
             <div class="flex flex-col items-center">
                 <span class="capitalize">{{ dayWeatherForecast.date }}</span>
-                <span class="text-neutral-500">{{ dayWeatherForecast.day_part }}</span>
+                <span class="text-neutral-500">{{ dayWeatherForecast.day_part_string }}</span>
             </div>
             <button
                 @click="nextDay"
@@ -83,11 +90,12 @@ export default {
         </div>
 
         <div class="flex flex-row justify-between">
-            <WeatherForecastInfo :forecast="dayWeatherForecast" />
+            <WeatherForecastInfo :forecast="dayWeatherForecast"/>
         </div>
 
         <span class="mx-auto">Vêtements recommandés</span>
-        <div class="overflow-auto grid grid-flow-col auto-cols-[30vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-4 -mb-10 pb-12 px-3 pb-4 scroll-px-4 snap-x">
+        <div
+            class="overflow-auto grid grid-flow-col auto-cols-[30vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-4 -mb-10 pb-12 px-3 pb-4 scroll-px-4 snap-x">
             <ClothingImage
                 v-for="clothing of clothesSuggestions"
                 :clothing="clothing"/>

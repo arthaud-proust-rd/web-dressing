@@ -3,10 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\City;
-use App\Models\WeatherForecast;
 use App\Services\CityService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Http;
 
 class FetchWeatherForecast extends Command
 {
@@ -37,6 +35,6 @@ class FetchWeatherForecast extends Command
             $cityService->fetchWeatherForecasts();
         }
 
-        return 1;
+        return 0;
     }
 }
