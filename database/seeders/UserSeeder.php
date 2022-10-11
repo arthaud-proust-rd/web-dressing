@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dressing;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
@@ -16,7 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<3; $i++) {
+        User::factory()
+            ->create([
+                'email' => "user@email.com"
+            ]);
+
+        for ($i = 1; $i < 3; $i++) {
             User::factory()
                 ->create([
                     'email' => "user$i@email.com"
