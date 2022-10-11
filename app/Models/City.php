@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 class City extends Model
 {
@@ -15,10 +15,11 @@ class City extends Model
         'name',
         'lat',
         'lon',
+        'insee',
     ];
 
     protected $appends = [
-      'days_weather_forecasts'
+        'days_weather_forecasts'
     ];
 
     public function dressings(): HasMany
@@ -33,8 +34,8 @@ class City extends Model
 
     public function getDaysWeatherForecastsAttribute(): Collection
     {
-        return $this->weatherForecasts()->get()->groupBy(function($item, $key) {
-           return substr($item['forecast_dt'], 0, 10);
+        return $this->weatherForecasts()->get()->groupBy(function ($item, $key) {
+            return substr($item['forecast_dt'], 0, 10);
         });
     }
 }

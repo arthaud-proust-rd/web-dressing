@@ -4,30 +4,29 @@ namespace App\Enums;
 
 enum ClothingCategory: int
 {
-    case ToCategorize = 0;
-    case Shirt = 1;
-    case Pants = 2;
-    case Underwear = 3;
-    case Pull = 4;
-    case Accessory = 5;
+    case TO_CATEGORIZE = 0;
+    case SHIRT = 1;
+    case PANTS = 2;
+    case UNDERWEAR = 3;
+    case PULL = 4;
+    case ACCESSORY = 5;
 
     public function toString(): string
     {
-        return match($this) {
-            self::ToCategorize => 'À catégoriser',
-            self::Shirt => 'T-shirts',
-            self::Pants => 'Pantalons',
-            self::Underwear => 'Sous-vêtements',
-            self::Pull => 'Pulls',
-            self::Accessory => 'Accessoires',
+        return match ($this) {
+            self::TO_CATEGORIZE => 'À catégoriser',
+            self::SHIRT => 'T-shirts',
+            self::PANTS => 'Pantalons',
+            self::UNDERWEAR => 'Sous-vêtements',
+            self::PULL => 'Pulls',
+            self::ACCESSORY => 'Accessoires',
         };
     }
 
     public static function associativeArray(): array
     {
         $list = [];
-        foreach (self::cases() as $category)
-        {
+        foreach (self::cases() as $category) {
             $list[$category->toString()] = $category->value;
         }
 
@@ -37,11 +36,10 @@ enum ClothingCategory: int
     public static function array(): array
     {
         $list = [];
-        foreach (self::cases() as $category)
-        {
+        foreach (self::cases() as $category) {
             $list[] = [
                 'label' => $category->toString(),
-                'value' =>$category->value
+                'value' => $category->value
             ];
         }
 

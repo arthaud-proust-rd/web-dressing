@@ -2,20 +2,18 @@
 
 namespace App\Enums;
 
-enum ClothingWeatherOptions: string
+enum WeatherForecastDayPart: string
 {
-    case RAINY = 'rainy';
-    case DRY = 'dry';
-    case COLD = 'cold';
-    case HOT = 'hot';
+    case DAY = 'day';
+    case MORNING = 'morning';
+    case AFTERNOON = 'afternoon';
 
     public function toString(): string
     {
         return match ($this) {
-            self::RAINY => 'Pluvieux',
-            self::DRY => 'Sec',
-            self::COLD => 'Froid',
-            self::HOT => 'Chaud',
+            self::DAY => 'Jour',
+            self::MORNING => 'Matin',
+            self::AFTERNOON => 'Après-midi',
         };
     }
 
