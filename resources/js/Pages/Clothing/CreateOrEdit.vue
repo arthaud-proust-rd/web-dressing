@@ -54,7 +54,7 @@ export default {
                 category: this.clothing?.category || this.clothingCategories[0].value,
                 image_front: null,
                 image_back: null,
-                weather_options: this.clothing?.weather_options,
+                weather_options: this.clothing?.weather_options || this.clothingWeatherOptions,
             }),
         }
     },

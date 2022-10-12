@@ -6,8 +6,8 @@ use App\Enums\ClothingCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dressing extends Model
 {
@@ -29,7 +29,8 @@ class Dressing extends Model
     ];
 
     protected $appends = [
-        'clothes_categories_stats'
+        'clothes_categories_stats',
+        'weather_suggestions'
     ];
 
     public function clothes(): HasMany
@@ -47,11 +48,29 @@ class Dressing extends Model
         return $this->belongsTo(City::class);
     }
 
+    public function getWeatherSuggestionsAttribute(): array
+    {
+        $suggestions = [];
+
+        foreach ($this->city->weatherForecasts as $weatherForecast) {
+            $weatherOptions = [];
+            $weatherOptions[$weatherForecast->isRainy ? 'rainy' : 'dry'] = true;
+            $weatherOptions[$weatherForecast->isCold ? 'cold' : 'hot'] = true;
+
+            $suggestions[] = $this
+                ->clothes()
+                ->weatherOptions($weatherOptions)
+                ->pluck('id');
+        }
+
+
+        return $suggestions;
+    }
+
     public function getClothesCategoriesStatsAttribute(): array
     {
         $stats = [];
-        foreach (ClothingCategory::cases() as $category)
-        {
+        foreach (ClothingCategory::cases() as $category) {
             $stats[] = [
                 'name' => $category->toString(),
                 'count' => $this->clothes()->category($category)->count()

@@ -16,40 +16,33 @@ export default {
     data() {
         return {
             dayIndex: 0,
-            clothesSuggestions: []
         }
     },
     mounted() {
-        for (let i = 0; i < this.daysWeatherForecasts.length; i++) {
-            if (Date.now() < new Date(this.daysWeatherForecasts[i].forecast_dt).getTime()) {
-                this.dayIndex = i;
-                break;
-            }
-        }
-        this.fetchForecastClothesSuggestions()
+        this.showIncomingForecast();
     },
     methods: {
+        showIncomingForecast() {
+            for (let i = 0; i < this.daysWeatherForecasts.length; i++) {
+                if (Date.now() < new Date(this.daysWeatherForecasts[i].forecast_dt).getTime()) {
+                    this.dayIndex = i;
+                    break;
+                }
+            }
+        },
         previousDay() {
             this.canPreviousDay && --this.dayIndex;
-            this.handleDayChange();
         },
         nextDay() {
             this.canNextDay && ++this.dayIndex;
-            this.handleDayChange();
-        },
-        handleDayChange() {
-            this.fetchForecastClothesSuggestions()
-        },
-        async fetchForecastClothesSuggestions() {
-            const res = await axios.get(route('api.dressing.weather-suggestions', {
-                'dressing': this.dressing.id,
-                'weatherForecast': this.dayWeatherForecast.id
-            }));
-
-            this.clothesSuggestions = res.data;
         },
     },
     computed: {
+        clothesSuggestions() {
+            return this.dressing.weather_suggestions[this.dayIndex].map(
+                clothingId => this.dressing.clothes.find(clothing => clothing.id === clothingId)
+            );
+        },
         canPreviousDay() {
             return this.dayIndex > 0
         },
@@ -57,7 +50,6 @@ export default {
             return this.dayIndex < this.daysWeatherForecasts.length - 1;
         },
         daysWeatherForecasts() {
-            // return Object.values(this.dressing.city.days_weather_forecasts)
             return Object.values(this.dressing.city.weather_forecasts);
         },
         dayWeatherForecast() {
