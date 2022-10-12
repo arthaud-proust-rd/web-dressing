@@ -23,7 +23,7 @@ defineProps({
         <Link class="p-4" :href="route('clothing.show', clothing)">
             <div class="flex flex-row text-amber-600">
                 <StarIcon
-                    v-for="n in clothing.note"
+                    v-for="n in parseInt(clothing.note)"
                     class="h-6 w-6"
                 />
             </div>
