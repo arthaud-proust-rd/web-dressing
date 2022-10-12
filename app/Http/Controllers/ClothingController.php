@@ -53,7 +53,7 @@ class ClothingController extends Controller
             $clothingService->setImageFront($request->image_front);
         }
         if ($request->image_back) {
-            $clothingService->setImageFront($request->image_back);
+            $clothingService->setImageBack($request->image_back);
         }
 
 //        $weatherOptions = [];
@@ -99,7 +99,7 @@ class ClothingController extends Controller
             $clothingService->setImageFront($request->image_front);
         }
         if ($request->image_back) {
-            $clothingService->setImageFront($request->image_back);
+            $clothingService->setImageBack($request->image_back);
         }
 
         $clothingService->save();

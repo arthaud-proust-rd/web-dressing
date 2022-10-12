@@ -56,8 +56,13 @@ export default {
                 category: this.clothing?.category || this.clothingCategories[0].value,
                 image_front: null,
                 image_back: null,
-                weather_options: this.clothing?.weather_options || this.clothingWeatherOptions,
+                weather_options: this.clothing?.weather_options || this.defaultWeatherOptionsForSelectedClothingCategory,
             }),
+        }
+    },
+    mounted() {
+        if (!this.form.weather_options) {
+            this.form.weather_options = this.defaultWeatherOptionsForSelectedClothingCategory;
         }
     },
     methods: {
@@ -81,7 +86,7 @@ export default {
             this.form.image_front = null;
         },
         handleFPImageBackProcess: function (error, file) {
-            this.form.image_front = file.serverId;
+            this.form.image_back = file.serverId;
         },
         handleFPImageBackRemove: function (error, file) {
             this.form.image_back = null;
@@ -108,6 +113,11 @@ export default {
                 label: city.name,
                 value: city.id
             }))
+        },
+        defaultWeatherOptionsForSelectedClothingCategory() {
+            const opts = {};
+            this.weatherOptions.forEach(opt => opts[opt.value] = false)
+            return opts;
         },
         noteOptions() {
             return [1, 2, 3].map(i => ({
@@ -219,7 +229,7 @@ export default {
                         v-for="option of weatherOptions"
                         :key="option.value"
                         :value="option.value"
-                        :checked="form.weather_options[option.value]"
+                        :checked="form.weather_options?.[option.value]"
                         @update:checked="value=>form.weather_options[option.value]=value"
                         :label="option.label"
                     >
