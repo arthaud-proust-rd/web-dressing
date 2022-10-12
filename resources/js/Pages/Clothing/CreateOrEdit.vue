@@ -187,7 +187,7 @@ export default {
                     </div>
                     <div class="flex-1 basis-2/3">
                         <FilePond
-                            :credits="false"
+                            credits=""
                             name="file"
                             accepted-file-types="image/*"
                             @init="handleFPInit"
@@ -207,7 +207,7 @@ export default {
                     </div>
                     <div class="flex-1 basis-2/3">
                         <FilePond
-                            :credits="false"
+                            credits=""
                             name="file"
                             accepted-file-types="image/*"
                             @init="handleFPInit"
