@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClothingController;
+use App\Http\Controllers\DressingController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\DressingController;
-use App\Http\Controllers\ClothingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::redirect('/', '/dressing');
+
+    Route::get('/profile', ProfileController::class)->name('user.profile');
 
     Route::resource('dressing', DressingController::class);
     Route::resource('clothing', ClothingController::class);
@@ -39,4 +42,4 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

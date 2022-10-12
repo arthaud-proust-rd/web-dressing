@@ -9,7 +9,8 @@ import {HangerIcon} from '@/Components/customHeroIcon.js';</script>
                   :class="{'text-amber-600': route().current('dressing.index')}">
                 <HangerIcon class="h-8 w-8"/>
             </Link>
-            <Link class="py-3 px-4">
+            <Link class="py-3 px-4" :href="route('user.profile')"
+                  :class="{'text-amber-600': route().current('user.profile')}">
                 <UserIcon class="h-8 w-8"/>
             </Link>
         </div>
