@@ -32,6 +32,9 @@ const proxyChecked = computed({
 <template>
     <div>
         <input type="checkbox" :value="value" v-model="proxyChecked" class="hidden peer" :id="inputId">
-        <label class="select-none btn-secondary peer-checked:btn-primary" :for="inputId">{{ label }}</label>
+        <label class="select-none btn-secondary peer-checked:btn-primary" :for="inputId">
+            <slot/>
+            {{ label }}
+        </label>
     </div>
 </template>

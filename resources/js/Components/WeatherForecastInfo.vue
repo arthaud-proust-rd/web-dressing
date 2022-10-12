@@ -36,8 +36,8 @@ export default {
 </script>
 <template>
     <div class="my-8 w-full grid grid-cols-3 items-center justify-items-center">
-        <img class="h-20" :src="weatherImageSrc">
-        <img class="h-20" :src="temperatureImageSrc">
+        <img class="h-16" :src="weatherImageSrc">
+        <img class="h-16" :src="temperatureImageSrc">
         <div class="flex flex-col items-center">
             <span class="text-3xl">{{ temperature }}°C</span>
             <!--            <span class="text-sky-500">{{ temperatureMin }}°C</span>-->
