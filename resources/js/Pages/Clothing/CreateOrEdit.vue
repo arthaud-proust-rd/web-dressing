@@ -17,6 +17,7 @@ import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 
 // Import the plugin styles
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import BackLink from "@/Components/BackLink.vue";
 
 const FilePond = vueFilePond(
     FilePondPluginImagePreview,
@@ -25,6 +26,7 @@ const FilePond = vueFilePond(
 
 export default {
     components: {
+        BackLink,
         ClothingImage,
         CheckboxButton,
         Select,
@@ -132,32 +134,25 @@ export default {
     <Head :title="isCreating ? 'Ajouter un vêtement' : 'Modifier un vêtement'"/>
 
     <AuthenticatedLayout>
+        <template #navigation>
+            <BackLink/>
+
+            <button v-if="!isCreating" class="btn text-red-600" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing" @click="submitDelete">
+                Supprimer
+            </button>
+        </template>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
 
-        <div class="flex items-center justify-between mt-4">
-            <template v-if="isCreating">
-                <Link class="text-gray-400 mb-3" href="#" onclick="history.back();return false;">Retour</Link>
-            </template>
-            <template v-else>
-                <Link class="text-gray-400 mb-3" :href="route('dressing.show', {dressing: clothing.dressing.id})">Retour
-                    au dressing
-                </Link>
-                <PrimaryButton class="ml-4 btn-danger" :class="{ 'opacity-25': form.processing }"
-                               :disabled="form.processing" @click="submitDelete">
-                    Supprimer
-                </PrimaryButton>
-            </template>
-        </div>
-
-        <form @submit.prevent="submit" class="flex flex-col gap-3">
-            <div>
-                <InputLabel for="name" value="Nom"/>
-                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus/>
-                <InputError class="mt-2" :message="form.errors.name"/>
-            </div>
+        <form @submit.prevent="submit" class="flex flex-col gap-4">
+            <!--            <div>-->
+            <!--                <InputLabel for="name" value="Nom"/>-->
+            <!--                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus/>-->
+            <!--                <InputError class="mt-2" :message="form.errors.name"/>-->
+            <!--            </div>-->
 
             <div>
                 <InputLabel for="dressing_id" value="Dressing"/>
@@ -196,7 +191,6 @@ export default {
                         />
                     </div>
                 </div>
-
             </div>
 
             <div>
@@ -219,22 +213,24 @@ export default {
             </div>
 
             <div>
-                <InputLabel for="weatherOptions" value="Image dos"/>
-                <CheckboxButton
-                    v-for="option of weatherOptions"
-                    :key="option.value"
-                    :value="option.value"
-                    :checked="form.weather_options[option.value]"
-                    @update:checked="value=>form.weather_options[option.value]=value"
-                    :label="option.label"/>
+                <InputLabel for="weatherOptions" value="Je mets le vêtement quand il fait..."/>
+                <div class="grid grid-cols-2 gap-2">
+                    <CheckboxButton
+                        v-for="option of weatherOptions"
+                        :key="option.value"
+                        :value="option.value"
+                        :checked="form.weather_options[option.value]"
+                        @update:checked="value=>form.weather_options[option.value]=value"
+                        :label="option.label"
+                    >
+                        <img class="h-8 pr-2" :src="'/img/' + option.value + '.png'">
+                    </CheckboxButton>
+                </div>
             </div>
 
-
-            <div class="flex items-center justify-end mt-4">
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Enregistrer
-                </PrimaryButton>
-            </div>
+            <PrimaryButton class="mt-6" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Enregistrer
+            </PrimaryButton>
         </form>
     </AuthenticatedLayout>
 </template>
