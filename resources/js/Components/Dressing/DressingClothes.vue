@@ -1,11 +1,13 @@
 <script>
-import { ListBulletIcon, Squares2X2Icon, CloudIcon } from '@heroicons/vue/24/outline';
+import {CloudIcon, ListBulletIcon, Squares2X2Icon} from '@heroicons/vue/24/outline';
 import ClothingImage from "@/Components/Clothing/ClothingImage.vue";
 import ClothingCard from "@/Components/Clothing/ClothingCard.vue";
 import DressingWeatherSuggestions from "@/Components/Dressing/DressingWeatherSuggestions.vue";
+import ClothingAddCard from "@/Components/Clothing/ClothingAddInCategoryCard.vue";
 
 export default {
     components: {
+        ClothingAddCard,
         ListBulletIcon,
         Squares2X2Icon,
         CloudIcon,
@@ -27,21 +29,21 @@ export default {
     methods: {
         clothesOfCategory(categoryInt) {
             return this.orderedClothes(
-                this.dressing.clothes.filter(clothing=>parseInt(clothing.category)===categoryInt)
+                this.dressing.clothes.filter(clothing => parseInt(clothing.category) === categoryInt)
             )
         },
-        orderedClothes(clothes=this.dressing.clothes) {
-            return clothes.sort((a,b)=>{
-                if(this.orderBy === 'note:desc') {
+        orderedClothes(clothes = this.dressing.clothes) {
+            return clothes.sort((a, b) => {
+                if (this.orderBy === 'note:desc') {
                     return Date.parse(a.created_at) - Date.parse(b.created_at);
                 }
-                if(this.orderBy === 'note:asc') {
+                if (this.orderBy === 'note:asc') {
                     return Date.parse(b.created_at) - Date.parse(a.created_at);
                 }
-                if(this.orderBy === 'note:desc') {
+                if (this.orderBy === 'note:desc') {
                     return a.note - b.note;
                 }
-                if(this.orderBy === 'note:asc') {
+                if (this.orderBy === 'note:asc') {
                     return b.note - a.note;
                 }
             })
@@ -70,8 +72,8 @@ export default {
         </select>
     </div>
 
-    <DressingWeatherSuggestions v-show="showWeather" :dressing="dressing" />
-<!--    <livewire:dressing.weather-suggestions :dressing="$dressing" />-->
+    <DressingWeatherSuggestions v-show="showWeather" :dressing="dressing"/>
+    <!--    <livewire:dressing.weather-suggestions :dressing="$dressing" />-->
 
     <div v-if="view==='grid'" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 my-6">
         <ClothingCard
@@ -82,12 +84,17 @@ export default {
     <template v-else v-for="[categoryName, categoryInt] of Object.entries(categories)">
         <div class="mt-6" v-if="clothesOfCategory(categoryInt).length">
             <h2 class="h2">{{ categoryName }}</h2>
-            <div class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-3 my-4 px-3 pb-4 scroll-px-4 snap-x">
+            <div
+                class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-3 my-4 px-3 pb-4 scroll-px-4 snap-x">
                 <ClothingCard
                     v-for="clothing of clothesOfCategory(categoryInt)"
                     :clothing="clothing"
                     :showActions="categoryInt===0"
                     :key="Date.now() + clothing.id"
+                />
+                <ClothingAddCard
+                    :dressing="dressing"
+                    :category="categoryInt"
                 />
             </div>
         </div>

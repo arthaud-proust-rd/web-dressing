@@ -53,7 +53,7 @@ export default {
                 dressing_id: this.clothing?.dressing.id || this.dressings[0].id,
                 name: this.clothing?.name || '',
                 note: this.clothing?.note || 1,
-                category: this.clothing?.category || this.clothingCategories[0].value,
+                category: this.clothing?.category || parseInt(this.$page.props.ziggy?.query?.category) || this.clothingCategories[0].value,
                 image_front: null,
                 image_back: null,
                 weather_options: this.clothing?.weather_options || this.defaultWeatherOptionsForSelectedClothingCategory,
@@ -61,6 +61,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.$page.props.ziggy.query.category);
         if (!this.form.weather_options) {
             this.form.weather_options = this.defaultWeatherOptionsForSelectedClothingCategory;
         }

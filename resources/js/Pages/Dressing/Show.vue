@@ -24,7 +24,7 @@ const props = defineProps({
         </template>
 
         <template #header>
-            <h1 class="h1">Dressing {{ dressing.name }}</h1>
+            <h1 class="h1">{{ dressing.name }}</h1>
         </template>
 
         <div class="mb-6 flex flex-wrap gap-2">

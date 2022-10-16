@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\City;
 use App\Models\Dressing;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DressingSeeder extends Seeder
@@ -17,14 +16,11 @@ class DressingSeeder extends Seeder
      */
     public function run()
     {
-        foreach (User::all() as $user){
+        foreach (User::all() as $user) {
             foreach (City::all() as $city) {
                 Dressing::factory()
                     ->for($city)
                     ->for($user)
-                    ->sequence(fn ($sequence) => [
-                        'name' => 'Seq '.$sequence->index
-                    ])
                     ->create();
             }
         }
