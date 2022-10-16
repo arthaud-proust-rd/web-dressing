@@ -19,7 +19,7 @@ class DressingFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => 'Dressing ' . $this->faker->word(),
             'user_id' => User::factory(),
             'city_id' => City::factory(),
         ];
