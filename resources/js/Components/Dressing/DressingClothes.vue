@@ -27,9 +27,9 @@ export default {
         }
     },
     methods: {
-        clothesOfCategory(categoryInt) {
+        clothesOfCategory(categoryId) {
             return this.orderedClothes(
-                this.dressing.clothes.filter(clothing => parseInt(clothing.category) === categoryInt)
+                this.dressing.clothes.filter(clothing => parseInt(clothing.category) === categoryId)
             )
         },
         orderedClothes(clothes = this.dressing.clothes) {
@@ -81,20 +81,20 @@ export default {
             :clothing="clothing"
             :key="Date.now() + clothing.id"/>
     </div>
-    <template v-else v-for="[categoryName, categoryInt] of Object.entries(categories)">
-        <div class="mt-6" v-if="clothesOfCategory(categoryInt).length">
+    <template v-else v-for="[categoryName, categoryId] of Object.entries(categories)">
+        <div class="mt-6" v-if="clothesOfCategory(categoryId).length">
             <h2 class="h2">{{ categoryName }}</h2>
             <div
                 class="overflow-auto grid grid-flow-col auto-cols-[40vw] sm:auto-cols-[35vw] md:auto-cols-[20vw] grid-rows-1 gap-4 -mx-3 my-4 px-3 pb-4 scroll-px-4 snap-x">
                 <ClothingCard
-                    v-for="clothing of clothesOfCategory(categoryInt)"
+                    v-for="clothing of clothesOfCategory(categoryId)"
                     :clothing="clothing"
-                    :showActions="categoryInt===0"
+                    :showActions="categoryId===0"
                     :key="Date.now() + clothing.id"
                 />
                 <ClothingAddCard
                     :dressing="dressing"
-                    :category="categoryInt"
+                    :category="{name: categoryName, id: categoryId}"
                 />
             </div>
         </div>
