@@ -50,7 +50,7 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                dressing_id: this.clothing?.dressing.id || this.dressings[0].id,
+                dressing_id: this.clothing?.dressing.id || parseInt(this.$page.props.ziggy?.query?.dressing) || this.dressings[0].id,
                 name: this.clothing?.name || '',
                 note: this.clothing?.note || 1,
                 category: this.clothing?.category || parseInt(this.$page.props.ziggy?.query?.category) || this.clothingCategories[0].value,

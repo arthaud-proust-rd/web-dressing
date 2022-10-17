@@ -34,8 +34,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dressing', DressingController::class);
     Route::resource('clothing', ClothingController::class);
-
-    Route::get('dressing/{dressing}/add-clothing', [ClothingController::class, 'create'])->name('dressing.add-clothing');
 });
 
 Route::get('/dashboard', function () {

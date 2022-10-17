@@ -28,7 +28,7 @@ const props = defineProps({
         </template>
 
         <div class="mb-6 flex flex-wrap gap-2">
-            <Link class="btn-primary" :href="route('dressing.add-clothing', dressing)">
+            <Link class="btn-primary" :href="route('clothing.create', {dressing: dressing.id})">
                 <PlusIcon class="h-6 w-6"/>
                 Vêtement
             </Link>

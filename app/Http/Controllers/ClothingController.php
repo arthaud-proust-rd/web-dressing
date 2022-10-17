@@ -7,7 +7,6 @@ use App\Enums\ClothingWeatherOptions;
 use App\Http\Requests\StoreClothingRequest;
 use App\Http\Requests\UpdateClothingRequest;
 use App\Models\Clothing;
-use App\Models\Dressing;
 use App\Services\ClothingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,10 +29,9 @@ class ClothingController extends Controller
         ]);
     }
 
-    public function create(?Dressing $dressing): Response
+    public function create(): Response
     {
         return Inertia::render('Clothing/CreateOrEdit', [
-            'selectedDressing' => $dressing,
             'dressings' => Auth::user()->dressings,
             'clothingCategories' => ClothingCategory::array(),
             'clothingWeatherOptions' => ClothingWeatherOptions::array(),
