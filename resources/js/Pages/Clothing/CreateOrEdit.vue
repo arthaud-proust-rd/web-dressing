@@ -61,7 +61,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$page.props.ziggy.query.category);
         if (!this.form.weather_options) {
             this.form.weather_options = this.defaultWeatherOptionsForSelectedClothingCategory;
         }
