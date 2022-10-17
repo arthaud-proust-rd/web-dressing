@@ -8,9 +8,9 @@ defineProps({
 });
 </script>
 <template>
-    <div class="card p-0 gap-0 snap-start bg-opacity-0">
+    <div class="card p-0 gap-0 snap-start bg-opacity-0 border-2 border-dashed">
         <Link :href="route('dressing.add-clothing', {dressing, category})"
-              class="h-full w-full flex flex-col items-center justify-center">
+              class="h-full w-full flex flex-col gap-3 items-center justify-center">
             <PlusIcon class="h-8 w-8 text-amber-600"/>
         </Link>
     </div>
