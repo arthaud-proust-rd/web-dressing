@@ -9,7 +9,9 @@ export default {
         }
     },
     methods: {
-        nextImage() {
+        nextImage(e) {
+            e.preventDefault();
+            
             if (!this.clothing.images) {
                 return
             }

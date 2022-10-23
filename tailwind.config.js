@@ -12,7 +12,7 @@ module.exports = {
     theme: {
         extend: {
             gridTemplateColumns: {
-                'auto': 'repeat(auto-fill, minmax(0, 1fr))',
+                'auto': 'repeat(auto-fill, 10rem)',
             },
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
