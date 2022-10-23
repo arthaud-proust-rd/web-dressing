@@ -80,7 +80,7 @@ export default {
         },
         defaultWeatherOptionsForSelectedClothingCategory() {
             const opts = {};
-            this.weatherOptions.forEach(opt => opts[opt.value] = false)
+            this.weatherOptions.forEach(opt => opts[opt.value] = true)
             return opts;
         },
         noteOptions() {
