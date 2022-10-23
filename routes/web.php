@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClothingController;
+use App\Http\Controllers\ClothingImageController;
 use App\Http\Controllers\DressingController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -34,6 +35,11 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dressing', DressingController::class);
     Route::resource('clothing', ClothingController::class);
+
+    Route::name('clothing.')->prefix('clothing')->group(function () {
+        Route::post('images/upload', [ClothingImageController::class, 'store'])->name('images.store');
+        Route::post('images/delete', [ClothingImageController::class, 'destroy'])->name('images.destroy');
+    });
 });
 
 Route::get('/dashboard', function () {

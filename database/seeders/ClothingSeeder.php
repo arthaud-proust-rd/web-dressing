@@ -121,8 +121,10 @@ class ClothingSeeder extends Seeder
                         ->for($dressing)
                         ->create([
                             'weather_options' => $clothing['weather_options'],
-                            'image_front' => 'tests/' . $clothing['image'] . '-front.jpeg',
-                            'image_back' => 'tests/' . $clothing['image'] . '-back.jpeg',
+                            'images' => [
+                                'tests/' . $clothing['image'] . '-front.jpeg',
+                                'tests/' . $clothing['image'] . '-back.jpeg',
+                            ],
                             'category' => $category
                         ]);
                 }

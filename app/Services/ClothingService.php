@@ -49,20 +49,9 @@ class ClothingService
         return $this;
     }
 
-    public function setImageFront($image): static
+    public function setImages(array $imagesPaths): static
     {
-        $this->instance->image_front = ImageService::fromFilePond($image)
-            ->optimizeForClothing()
-            ->getPath();
-
-        return $this;
-    }
-
-    public function setImageBack($image): static
-    {
-        $this->instance->image_back = ImageService::fromFilePond($image)
-            ->optimizeForClothing()
-            ->getPath();
+        $this->instance->images = $imagesPaths;
 
         return $this;
     }

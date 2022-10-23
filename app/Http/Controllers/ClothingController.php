@@ -47,18 +47,9 @@ class ClothingController extends Controller
             ->setNote($request->note)
             ->setWeatherOptionsFromAssociative($request->weather_options);
 
-        if ($request->image_front) {
-            $clothingService->setImageFront($request->image_front);
+        if ($request->images) {
+            $clothingService->setImages($request->images);
         }
-        if ($request->image_back) {
-            $clothingService->setImageBack($request->image_back);
-        }
-
-//        $weatherOptions = [];
-//        foreach (ClothingWeatherOptions::values() as $option) {
-//            $weatherOptions[$option] = $request->has('weather_options.' . $option);
-//        }
-//        $clothing->weather_options = $weatherOptions;
 
         $clothingService->save();
 
@@ -93,11 +84,8 @@ class ClothingController extends Controller
             ->setNote($request->note)
             ->setWeatherOptionsFromAssociative($request->weather_options);
 
-        if ($request->image_front) {
-            $clothingService->setImageFront($request->image_front);
-        }
-        if ($request->image_back) {
-            $clothingService->setImageBack($request->image_back);
+        if ($request->images) {
+            $clothingService->setImages($request->images);
         }
 
         $clothingService->save();

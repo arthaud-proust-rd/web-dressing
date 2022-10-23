@@ -16,20 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
 
     Route::controller(DressingApiController::class)
-    ->prefix('dressing')
-    ->name('dressing.')
-    ->group(function () {
+        ->prefix('dressing')
+        ->name('dressing.')
+        ->group(function () {
 
-        Route::get('{dressing}/weather-suggestions/{weatherForecast}', 'weatherSuggestions')
-            ->name('weather-suggestions');
-    });
+            Route::get('{dressing}/weather-suggestions/{weatherForecast}', 'weatherSuggestions')
+                ->name('weather-suggestions');
+        });
 });
 
 
