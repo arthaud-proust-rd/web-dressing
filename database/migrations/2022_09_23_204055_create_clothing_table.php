@@ -3,10 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ClothingCategory;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -21,8 +19,8 @@ return new class extends Migration
 
             $table->smallInteger('note');
 
-            $table->string('image_front')->nullable();
-            $table->string('image_back')->nullable();
+            $table->json('images')
+                ->nullable();
 
             $table->smallInteger('category');
 

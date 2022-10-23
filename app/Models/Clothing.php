@@ -5,8 +5,8 @@ namespace App\Models;
 use App\Enums\ClothingCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Clothing extends Model
 {
@@ -18,6 +18,7 @@ class Clothing extends Model
         'dressing_id',
         'note',
         'category',
+        'images',
         'image_front',
         'image_back',
         'weather_options'
@@ -25,21 +26,13 @@ class Clothing extends Model
 
     protected $casts = [
         'dressing_id' => 'int',
+        'images' => 'array',
         'weather_options' => 'array'
     ];
 
     public function dressing(): BelongsTo
     {
         return $this->belongsTo(Dressing::class);
-    }
-
-    public function getImage($image): ?string
-    {
-        return match ($image) {
-            "front" => $this->image_front,
-            "back" => $this->image_back,
-            default => null,
-        };
     }
 
     public function scopeCategory($query, ClothingCategory $category)
@@ -52,12 +45,13 @@ class Clothing extends Model
         return $query->where('category', $category);
     }
 
-    public function scopeWeatherOptions($query, Array $options)
+    public function scopeWeatherOptions($query, array $options)
     {
         $q = $query;
-        foreach($options as $option=>$value) {
-            $q = $query->where('weather_options->'.$option, $value);
+        foreach ($options as $option => $value) {
+            $q = $query->where('weather_options->' . $option, $value);
         }
         return $q;
     }
+
 }

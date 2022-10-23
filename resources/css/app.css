@@ -39,6 +39,10 @@
         @apply btn text-white bg-red-500 hover:bg-red-600 ;
     }
 
+    .btn-icon-danger {
+        @apply btn-icon bg-red-100 text-red-600 ;
+    }
+
     .input {
         @apply px-2 py-2 rounded-md border-2 border-gray-200 hover:border-gray-300 transition ease-in-out duration-150;
     }
