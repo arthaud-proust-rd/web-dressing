@@ -156,7 +156,7 @@ export default {
                     <!--                    </div>-->
                     <div class="flex-1 basis-2/3">
                         <ClothingImagesInput
-                            :uploadedImages="clothing?.images || []"
+                            :alreadyUploadedImages="clothing?.images || []"
                             @change:images="handleImagesChange"
                         />
                     </div>
