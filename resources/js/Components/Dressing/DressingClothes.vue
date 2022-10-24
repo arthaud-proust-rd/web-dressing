@@ -82,6 +82,9 @@ export default {
             v-for="clothing of this.dressing.clothes"
             :clothing="clothing"
             :key="Date.now() + clothing.id"/>
+        <ClothingAddCard
+            :dressing="dressing"
+        />
     </div>
     <template v-else v-for="[categoryName, categoryId] of Object.entries(categories)">
         <div class="mt-6" v-if="clothesOfCategory(categoryId).length">
