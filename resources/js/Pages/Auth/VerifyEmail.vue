@@ -1,8 +1,7 @@
 <script setup>
-import { computed } from 'vue';
+import {computed} from 'vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import {Head, Link, useForm} from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     status: String,
@@ -19,23 +18,25 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
 
 <template>
     <GuestLayout>
-        <Head title="Email Verification" />
+        <Head title="Vérification de l'email"/>
 
-        <div class="mb-4 text-sm text-gray-600">
-            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
-        </div>
+        <form @submit.prevent="submit" class="flex flex-col gap-5">
 
-        <div class="mb-4 font-medium text-sm text-green-600" v-if="verificationLinkSent" >
-            A new verification link has been sent to the email address you provided during registration.
-        </div>
+            <p class="text-neutral-600">
+                Merci de vous être inscrit! Pouvez-vous confirmer votre adresse mail avant de continuer? Nous vous avons
+                envoyé un mail, il suffit de cliquer sur le lien qu'il contient.
+            </p>
 
-        <form @submit.prevent="submit">
-            <div class="mt-4 flex items-center justify-between">
-                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Resend Verification Email
-                </PrimaryButton>
+            <p class="font-medium text-green-600" v-if="verificationLinkSent">
+                Un nouveau lien vous a été renvoyé à l'adresse que vous avez fourni lors de votre inscription.
+            </p>
 
-                <Link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Log Out</Link>
+            <div class="flex flex-col gap-2">
+                <button class="btn btn-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Renvoyer un lien
+                </button>
+
+                <Link :href="route('logout')" method="post" as="button" class="btn btn-tertiary">Se déconnecter</Link>
             </div>
         </form>
     </GuestLayout>
