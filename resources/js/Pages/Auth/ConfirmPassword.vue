@@ -2,9 +2,9 @@
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import {Head, useForm} from '@inertiajs/inertia-vue3';
+import BackLink from "@/Components/BackLink.vue";
 
 const form = useForm({
     password: '',
@@ -19,24 +19,25 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Confirm Password" />
+        <Head title="Confirmer le mot de passe"/>
 
-        <div class="mb-4 text-sm text-gray-600">
-            This is a secure area of the application. Please confirm your password before continuing.
-        </div>
+        <form @submit.prevent="submit" class="flex flex-col gap-5">
+            <BackLink/>
 
-        <form @submit.prevent="submit">
+            <p class="text-neutral-600">
+                Pour des raisons de sécurité, veuillez confirmer votre mot de passe avant de continuer.
+            </p>
+
             <div>
-                <InputLabel for="password" value="Password" />
-                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputLabel for="password" value="Mot de passe"/>
+                <TextInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required
+                           autocomplete="current-password" autofocus/>
+                <InputError class="mt-2" :message="form.errors.password"/>
             </div>
 
-            <div class="flex justify-end mt-4">
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Confirm
-                </PrimaryButton>
-            </div>
+            <button class="btn btn-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Continuer
+            </button>
         </form>
     </GuestLayout>
 </template>
