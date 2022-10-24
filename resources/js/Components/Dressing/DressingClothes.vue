@@ -1,5 +1,6 @@
 <script>
 import {CloudIcon, ListBulletIcon, Squares2X2Icon} from '@heroicons/vue/24/outline';
+import {WeatherIcon} from "@/Components/customHeroIcon";
 import ClothingImage from "@/Components/Clothing/ClothingImage.vue";
 import ClothingCard from "@/Components/Clothing/ClothingCard.vue";
 import DressingWeatherSuggestions from "@/Components/Dressing/DressingWeatherSuggestions.vue";
@@ -7,6 +8,7 @@ import ClothingAddCard from "@/Components/Clothing/ClothingAddInCategoryCard.vue
 
 export default {
     components: {
+        WeatherIcon,
         ClothingAddCard,
         ListBulletIcon,
         Squares2X2Icon,
@@ -62,7 +64,7 @@ export default {
             </button>
         </div>
         <button :class="showWeather ? 'btn-primary' : 'btn-secondary'" @click="showWeather=!showWeather">
-            <CloudIcon class="h-6 w-6"/>
+            <WeatherIcon class="h-6 w-6"/>
         </button>
         <select v-if="false" v-model="orderBy" class="btn-secondary pr-8 border-0" id="">
             <option value="note:asc">Note - à +</option>
