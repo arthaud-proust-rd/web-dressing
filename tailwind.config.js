@@ -20,6 +20,9 @@ module.exports = {
             aspectRatio: {
                 '4/3': '4 / 3',
                 '3/4': '3 / 4',
+            },
+            scale: {
+                'mirror': '-1'
             }
         },
     },
