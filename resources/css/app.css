@@ -20,7 +20,7 @@
     }
 
     .btn-icon {
-        @apply p-3 rounded-full bg-opacity-40 bg-amber-100 text-amber-600;
+        @apply p-3 rounded-full bg-opacity-80 bg-amber-100 text-amber-600;
     }
 
     .btn-primary {

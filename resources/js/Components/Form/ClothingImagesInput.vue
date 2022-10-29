@@ -1,12 +1,17 @@
 <script>
-import {XMarkIcon} from '@heroicons/vue/24/solid';
+import {CameraIcon, DocumentPlusIcon, TrashIcon, XMarkIcon} from '@heroicons/vue/24/outline';
 import Draggable from 'vuedraggable';
 import {v4 as uuid} from 'uuid';
+import TakePhoto from "@/Components/TakePhoto.vue";
 
 export default {
     components: {
         Draggable,
-        XMarkIcon
+        XMarkIcon,
+        DocumentPlusIcon,
+        CameraIcon,
+        TakePhoto,
+        TrashIcon,
     },
     props: {
         alreadyUploadedImages: {
@@ -26,6 +31,7 @@ export default {
     data() {
         return {
             images: [],
+            isCameraOpen: false,
             uploadForm: this.$inertia.form({
                 image: null,
             }),
@@ -35,6 +41,9 @@ export default {
         }
     },
     methods: {
+        handleTakenPhoto(photo) {
+            this.uploadImage(photo);
+        },
         async uploadImages(e) {
             e.target.files.forEach(image => this.uploadImage(image));
         },
@@ -114,7 +123,7 @@ export default {
         >
             <template #item="{element}">
                 <div
-                    class="relative overflow-hidden rounded-md w-1/3"
+                    class="flex-shrink-0 relative overflow-hidden rounded-md w-1/3"
                 >
                     <div v-if="element.uploading"
                          class="flex flex-row justify-center items-center w-full aspect-3/4 object-cover bg-neutral-100 text-neutral-400 font-semibold">
@@ -136,15 +145,25 @@ export default {
                         <button v-if="!element.uploading  && !element.src.startsWith('test')" type="button"
                                 class="btn-icon-danger"
                                 @click="deleteImage(element.src)">
-                            <XMarkIcon class="h-4 w-4"/>
+                            <TrashIcon class="h-4 w-4"/>
                         </button>
                     </div>
                 </div>
             </template>
         </Draggable>
-        <label class="rounded-md text-center bg-neutral-100 p-3 cursor-pointer select-none" for="clothing-images">
-            Ajouter une image
-        </label>
-        <input class="hidden" type="file" multiple id="clothing-images" name="clothing-images" @change="uploadImages"/>
+        <input class="hidden" type="file" multiple id="clothing-images" name="clothing-images"
+               @change="uploadImages"/>
+        <div class="grid grid-cols-2 gap-2" v-show="!isCameraOpen">
+            <label class="btn btn-secondary flex-col" for="clothing-images">
+                <DocumentPlusIcon class="h-6 w-6"/>
+                Depuis les fichiers
+            </label>
+            <button type="button" class="btn flex-col" :class="isCameraOpen?'btn-primary':'btn-secondary'"
+                    @click="isCameraOpen = !isCameraOpen">
+                <CameraIcon class="h-6 w-6"/>
+                {{ isCameraOpen ? 'Fermer' : 'Ouvrir' }} la caméra
+            </button>
+        </div>
+        <TakePhoto :isOpen="isCameraOpen" @photo:taken="handleTakenPhoto" @close="isCameraOpen=false"/>
     </div>
 </template>
