@@ -23,6 +23,7 @@ export default {
     },
     async mounted() {
         await this.setVideoDevices();
+        this.selectRearVideoDevice();
         this.createCameraElement();
     },
     beforeUnmount() {
@@ -42,6 +43,15 @@ export default {
         async setVideoDevices() {
             this.videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(device => device.kind === "videoinput");
             this.videoDeviceIndex = 0;
+        },
+        selectRearVideoDevice() {
+            const rearIndex = this.videoDevices.findIndex(device =>
+                device.label && (device.label.includes('rear') || device.label.includes('back'))
+            )
+
+            if (rearIndex > -1) {
+                this.videoDeviceIndex = rearIndex;
+            }
         },
         selectNextVideoDevice() {
             console.group('select next video device');
