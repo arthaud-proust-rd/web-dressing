@@ -148,7 +148,7 @@ export default {
 
         <h2 class="text-xl text-center mt-6">{{ title }}</h2>
 
-        <form @submit.prevent="submit" class="block h-max mt-auto flex flex-col gap-4">
+        <form @submit.prevent="submit" class="block flex flex-col gap-4">
             <div v-if="step===0" class="flex flex-col gap-4">
                 <div>
                     <InputLabel for="file" value="Images"/>

@@ -156,12 +156,12 @@ export default {
         <div class="grid grid-cols-2 gap-2" v-show="!isCameraOpen">
             <label class="btn btn-secondary flex-col" for="clothing-images">
                 <DocumentPlusIcon class="h-6 w-6"/>
-                Depuis les fichiers
+                Fichiers
             </label>
             <button type="button" class="btn flex-col" :class="isCameraOpen?'btn-primary':'btn-secondary'"
                     @click="isCameraOpen = !isCameraOpen">
                 <CameraIcon class="h-6 w-6"/>
-                {{ isCameraOpen ? 'Fermer' : 'Ouvrir' }} la caméra
+                Caméra
             </button>
         </div>
         <Camera :isOpen="isCameraOpen" @photo:taken="handleTakenPhoto" @close="isCameraOpen=false"/>

@@ -44,12 +44,19 @@ export default {
             this.videoDeviceIndex = 0;
         },
         selectNextVideoDevice() {
-            if (this.videoDeviceIndex + 1 < this.videoDevices.length - 1) {
-                this.videoDeviceIndex++;
-            } else {
+            console.group('select next video device');
+            console.log('Video devices')
+            console.log(this.videoDevices);
+            console.log(this.videoDeviceIndex + 1)
+            console.log(this.videoDevices.length);
+
+            if (this.videoDeviceIndex + 1 >= this.videoDevices.length) {
                 this.videoDeviceIndex = 0;
+            } else {
+                this.videoDeviceIndex++;
             }
 
+            console.groupEnd();
             this.stopCameraStream();
             this.createCameraElement();
         },
@@ -139,7 +146,7 @@ export default {
                 <button type="button" class="btn-icon" @click="takePhoto">
                     <CameraIcon class="h-6 w-6"/>
                 </button>
-                <button type="button" class="btn-icon" v-if="videoDevices.length>1" @click="selectNextVideoDevice">
+                <button type="button" class="btn-icon" v-if="videoDevices.length>0" @click="selectNextVideoDevice">
                     <ArrowPathIcon class="h-6 w-6"/>
                 </button>
             </div>
