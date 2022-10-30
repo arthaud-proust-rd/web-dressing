@@ -122,13 +122,11 @@ export default {
             this.$refs.canvas.width = camEl.width;
 
             const context = this.$refs.canvas.getContext('2d');
-            context.scale(-1, 1);
             context.drawImage(
                 this.$refs.camera,
                 (camStream.width - camEl.width) / 2, 0, camEl.width, camEl.height,
-                0, 0, -camEl.width, camEl.height
+                0, 0, camEl.width, camEl.height
             );
-            context.scale(1, 1);
 
             await this.emitTakenPhoto();
 
@@ -156,7 +154,7 @@ export default {
             <div v-show="isLoading" class="aspect-3/4 object-cover rounded-md"></div>
 
             <video v-show="!(isPhotoTaken || isLoading)" ref="camera"
-                   class="scale-x-mirror aspect-3/4 object-cover rounded-md"
+                   class="aspect-3/4 object-cover rounded-md"
                    autoplay></video>
 
             <canvas v-show="isPhotoTaken" class="w-full aspect-3/4" id="photoTaken" ref="canvas"></canvas>
