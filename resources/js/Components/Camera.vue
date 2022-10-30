@@ -69,7 +69,9 @@ export default {
 
             const constraints = (window.constraints = {
                 audio: false,
-                video: this.videoDeviceIndex !== null ? {exact: this.videoDevices[this.videoDeviceIndex].deviceId} : true
+                video: {
+                    deviceId: this.videoDeviceIndex !== null ? {exact: this.videoDevices[this.videoDeviceIndex].deviceId} : undefined
+                }
             });
 
             console.log(constraints);
