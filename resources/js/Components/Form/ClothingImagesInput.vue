@@ -2,7 +2,7 @@
 import {CameraIcon, DocumentPlusIcon, TrashIcon, XMarkIcon} from '@heroicons/vue/24/outline';
 import Draggable from 'vuedraggable';
 import {v4 as uuid} from 'uuid';
-import TakePhoto from "@/Components/TakePhoto.vue";
+import Camera from "@/Components/Camera.vue";
 
 export default {
     components: {
@@ -10,7 +10,7 @@ export default {
         XMarkIcon,
         DocumentPlusIcon,
         CameraIcon,
-        TakePhoto,
+        Camera,
         TrashIcon,
     },
     props: {
@@ -164,6 +164,6 @@ export default {
                 {{ isCameraOpen ? 'Fermer' : 'Ouvrir' }} la caméra
             </button>
         </div>
-        <TakePhoto :isOpen="isCameraOpen" @photo:taken="handleTakenPhoto" @close="isCameraOpen=false"/>
+        <Camera :isOpen="isCameraOpen" @photo:taken="handleTakenPhoto" @close="isCameraOpen=false"/>
     </div>
 </template>
