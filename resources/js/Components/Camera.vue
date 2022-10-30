@@ -45,10 +45,9 @@ export default {
         },
         selectNextVideoDevice() {
             console.group('select next video device');
-            console.log('Video devices')
-            console.log(this.videoDevices);
-            console.log(this.videoDeviceIndex + 1)
-            console.log(this.videoDevices.length);
+            console.log('Video devices: ', this.videoDevices)
+            console.log('Will select index:', this.videoDeviceIndex + 1)
+            console.log('Devices length: ', this.videoDevices.length);
 
             if (this.videoDeviceIndex + 1 >= this.videoDevices.length) {
                 this.videoDeviceIndex = 0;
@@ -59,6 +58,11 @@ export default {
             console.groupEnd();
             this.stopCameraStream();
             this.createCameraElement();
+
+            console.group('Selected device');
+            console.log(this.videoDevices[this.videoDeviceIndex]);
+            console.groupEnd()
+
         },
         createCameraElement() {
             this.isLoading = true;
