@@ -18,6 +18,7 @@ export default {
             isPhotoTaken: false,
             isShotPhoto: false,
             isLoading: false,
+            error: false,
             link: '#'
         }
     },
@@ -54,25 +55,28 @@ export default {
             }
         },
         selectNextVideoDevice() {
-            console.group('select next video device');
-            console.log('Video devices: ', this.videoDevices)
-            console.log('Will select index:', this.videoDeviceIndex + 1)
-            console.log('Devices length: ', this.videoDevices.length);
-
             if (this.videoDeviceIndex + 1 >= this.videoDevices.length) {
                 this.videoDeviceIndex = 0;
             } else {
                 this.videoDeviceIndex++;
             }
 
-            console.groupEnd();
             this.stopCameraStream();
             this.createCameraElement();
+        },
+        getDeviceId() {
+            if (!this.videoDeviceIndex) {
+                return undefined;
+            }
+            const device = this.videoDevices[this.videoDeviceIndex];
 
-            console.group('Selected device');
-            console.log(this.videoDevices[this.videoDeviceIndex]);
-            console.groupEnd()
+            if (device.deviceId === "") {
+                return undefined;
+            }
 
+            return {
+                exact: device.deviceId
+            }
         },
         createCameraElement() {
             this.isLoading = true;
@@ -80,11 +84,13 @@ export default {
             const constraints = (window.constraints = {
                 audio: false,
                 video: {
-                    deviceId: this.videoDeviceIndex !== null ? {exact: this.videoDevices[this.videoDeviceIndex].deviceId} : undefined
+                    deviceId: this.getDeviceId()
                 }
             });
 
-            console.log(constraints);
+            console.log(this.videoDevices);
+            console.log(constraints)
+
 
             navigator.mediaDevices
                 .getUserMedia(constraints)
@@ -92,7 +98,8 @@ export default {
                     this.$refs.camera.srcObject = stream;
                 })
                 .catch(error => {
-                    alert("May the browser didn't support or there is some errors.");
+                    this.error = error;
+                    console.error(error);
                 })
                 .finally(() => {
                     this.isLoading = false;
@@ -154,18 +161,25 @@ export default {
 
             <canvas v-show="isPhotoTaken" class="w-full aspect-3/4" id="photoTaken" ref="canvas"></canvas>
 
-            <div class="absolute w-full top-0 flex flex-row items-center justify-start p-4 gap-4">
-                <button type="button" class="btn-icon" @click="close">
+            <div v-if="false" class="absolute w-full top-0 flex flex-row items-center justify-start p-4 gap-4">
+                <button type="button" class="btn-icon-danger" @click="close">
                     <XMarkIcon class="h-6 w-6"/>
                 </button>
             </div>
 
-            <div class="absolute w-full bottom-0 flex flex-row items-center justify-center p-4 gap-4">
-                <button type="button" class="btn-icon" @click="takePhoto">
-                    <CameraIcon class="h-6 w-6"/>
+            <div class="absolute w-full bottom-0 flex flex-row items-end justify-center p-4 gap-4">
+                <div v-show="error" class="text-red-600 bg-red-100 p-4 rounded-lg">
+                    Impossible d'accéder à la caméra
+                </div>
+                <button type="button" class="btn-icon-danger p-2" @click="close">
+                    <XMarkIcon class="h-5 w-5"/>
                 </button>
-                <button type="button" class="btn-icon" v-if="videoDevices.length>0" @click="selectNextVideoDevice">
-                    <ArrowPathIcon class="h-6 w-6"/>
+                <button v-show="!error" type="button" class="btn-icon" @click="takePhoto">
+                    <CameraIcon class="h-8 w-8"/>
+                </button>
+                <button v-show="!error" type="button" class="btn-icon p-2" v-if="videoDevices.length>0"
+                        @click="selectNextVideoDevice">
+                    <ArrowPathIcon class="h-5 w-5"/>
                 </button>
             </div>
         </div>
