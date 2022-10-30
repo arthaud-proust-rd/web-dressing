@@ -69,8 +69,10 @@ export default {
 
             const constraints = (window.constraints = {
                 audio: false,
-                video: this.videoDeviceIndex ? {exact: this.videoDevices[this.videoDeviceIndex].deviceId} : true
+                video: this.videoDeviceIndex !== null ? {exact: this.videoDevices[this.videoDeviceIndex].deviceId} : true
             });
+
+            console.log(constraints);
 
             navigator.mediaDevices
                 .getUserMedia(constraints)
