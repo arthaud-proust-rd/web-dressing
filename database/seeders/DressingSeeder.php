@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\City;
 use App\Models\Dressing;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DressingSeeder extends Seeder
@@ -16,14 +16,13 @@ class DressingSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::all();
-
-        foreach ($users as $user){
-            Dressing::factory()
-                ->count(2)
-                ->hasClothes(6)
-                ->for($user)
-                ->create();
+        foreach (User::all() as $user) {
+            foreach (City::all() as $city) {
+                Dressing::factory()
+                    ->for($city)
+                    ->for($user)
+                    ->create();
+            }
         }
     }
 }

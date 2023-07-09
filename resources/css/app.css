@@ -4,23 +4,43 @@
 
 @layer components {
     .card {
-        @apply gap-2 rounded-2xl overflow-hidden p-4 flex flex-col bg-gray-100;
+        @apply gap-2 rounded-2xl overflow-hidden p-4 flex flex-col bg-neutral-100;
+    }
+
+    .bg-secondary {
+        @apply bg-neutral-100;
+    }
+
+    .btn, .btn-icon {
+        @apply flex flex-row gap-1 justify-center items-center cursor-pointer transition ease-in-out duration-150 font-semibold;
     }
 
     .btn {
-        @apply flex flex-row gap-1 justify-center items-center cursor-pointer px-4 py-2 rounded-md transition ease-in-out duration-150 font-semibold;
+        @apply px-4 py-2 rounded-md;
     }
+
+    .btn-icon {
+        @apply p-3 rounded-full bg-opacity-80 bg-amber-100 text-amber-600;
+    }
+
     .btn-primary {
         @apply btn text-white bg-amber-600 hover:bg-amber-500;
     }
+
     .btn-secondary {
-        @apply btn text-black bg-neutral-100 hover:bg-neutral-200 ;
+        @apply btn text-black bg-secondary hover:bg-neutral-200 ;
     }
+
     .btn-tertiary {
-        @apply btn text-neutral-500 hover:bg-neutral-300;
+        @apply btn text-neutral-500 hover:bg-neutral-100;
     }
+
     .btn-danger {
         @apply btn text-white bg-red-500 hover:bg-red-600 ;
+    }
+
+    .btn-icon-danger {
+        @apply btn-icon bg-red-100 text-red-600 ;
     }
 
     .input {
@@ -30,6 +50,7 @@
     .h1 {
         @apply text-2xl mb-4;
     }
+
     .h2 {
         @apply text-xl mb-2;
     }

@@ -10,9 +10,9 @@
 
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-        <livewire:input type="text" name="email" title="Email"/>
-        <livewire:input type="password" name="password" title="Mot de passe"/>
-        <livewire:input type="password" name="password_confirmation" title="Confirmer le mot de passe"/>
+        <livewire:input type="text" property="email" title="Email"/>
+        <livewire:input type="password" property="password" title="Mot de passe"/>
+        <livewire:input type="password" property="password_confirmation" title="Confirmer le mot de passe"/>
 
         <button class="btn-primary">
             Modifier le mot de passe

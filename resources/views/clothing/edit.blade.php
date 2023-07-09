@@ -34,27 +34,33 @@
         @endif
 
         <livewire:input type="radio-select"
-                        name="dressing_id"
+                        property="dressing_id"
                         title="Dressing"
                         :bind="$clothing"
                         :options="$dressings->pluck('id', 'name')->toArray()"/>
 
-        <livewire:input type="file" name="image_front" title="Image face" :bind="$clothing"/>
-        <livewire:input type="file" name="image_back" title="Image dos" :bind="$clothing"/>
+        <livewire:input type="file" property="image_front" title="Image face" :bind="$clothing"/>
+        <livewire:input type="file" property="image_back" title="Image dos" :bind="$clothing"/>
 
         <livewire:input type="radio-select"
-                        name="category"
+                        property="category"
                         title="Catégorie"
                         :bind="$clothing"
                         :options="$clothingCategories"/>
 
         <livewire:input type="radio-select"
-                        name="note"
+                        property="note"
                         title="Note"
                         :bind="$clothing"
                         :options="['1'=>1,'2'=>2,'3'=>3]"/>
 
-{{--        <livewire:input type="text" name="name" title="Nom" :bind="$clothing"/>--}}
+        <livewire:input type="checkboxes-group"
+                        property="weather_options"
+                        title="Par quel temps le porter?"
+                        :bind="$clothing"
+                        :options="$clothingWeatherOptions"/>
+
+{{--        <livewire:input type="text" property="name" title="Nom" :bind="$clothing"/>--}}
 
         <input class="btn-primary mt-6" type="submit" value="Enregistrer"/>
 

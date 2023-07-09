@@ -17,10 +17,22 @@ class ClothingFactory extends Factory
      */
     public function definition()
     {
+        $rainy = $this->faker->boolean();
+        $dry = !$rainy || $this->faker->boolean();
+
+        $cold = $this->faker->boolean();
+        $hot = !$cold || $this->faker->boolean();
+
         return [
 //            'name' => $this->faker->word(),
             'note' => $this->faker->numberBetween(1,3),
-            'category' => $this->faker->randomElement(ClothingCategory::cases())
+            'category' => $this->faker->randomElement(ClothingCategory::cases()),
+            'weather_options' => [
+                'rainy' => $rainy,
+                'dry' => $dry,
+                'cold' => $cold,
+                'hot' => $hot,
+            ]
         ];
     }
 }

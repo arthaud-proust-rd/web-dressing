@@ -9,7 +9,7 @@
         <h1 class="h1">Mot de passe oublié</h1>
         <p>Nous allons vous envoyer un mail pour réinitialiser votre mot de passe</p>
 
-        <livewire:input type="text" name="email" title="Email"/>
+        <livewire:input type="text" property="email" title="Email"/>
 
         <button class="btn-primary">
             Envoyer un mail

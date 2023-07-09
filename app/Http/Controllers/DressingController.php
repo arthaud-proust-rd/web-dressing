@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Enums\ClothingCategory;
 use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
+use App\Models\City;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DressingController extends Controller
 {
@@ -17,16 +20,18 @@ class DressingController extends Controller
     {
         $this->authorizeResource(Dressing::class, 'dressing');
     }
-    public function index(): View
+    public function index(): Response
     {
-        return view('dressing.index', [
+        return Inertia::render('Dressing/Index', [
             'dressings' => Auth::user()->dressings
         ]);
     }
 
     public function create()
     {
-        return view('dressing.create');
+        return Inertia::render('Dressing/CreateOrEdit', [
+            'cities' => City::all(),
+        ]);
     }
 
     public function store(StoreDressingRequest $request)
@@ -34,6 +39,7 @@ class DressingController extends Controller
         $dressing = new Dressing;
 
         $dressing->name = request('name');
+        $dressing->city_id = request('city_id');
         $dressing->user_id = $request->user()->id;
 
         $dressing->save();
@@ -43,24 +49,26 @@ class DressingController extends Controller
         return redirect()->route('dressing.show', $dressing->id);
     }
 
-    public function show(Dressing $dressing): View
+    public function show(Dressing $dressing): Response
     {
-        return view('dressing.show', [
+        return Inertia::render('Dressing/Show', [
             'dressing' => $dressing,
-            'categories' => ClothingCategory::list()
+            'categories' => ClothingCategory::associativeArray()
         ]);
     }
 
     public function edit(Dressing $dressing)
     {
-        return view('dressing.edit',  [
-            'dressing' => $dressing
+        return Inertia::render('Dressing/CreateOrEdit', [
+            'dressing' => $dressing,
+            'cities' => City::all(),
         ]);
     }
 
     public function update(UpdateDressingRequest $request, Dressing $dressing)
     {
         $dressing->name = request('name');
+        $dressing->city_id = request('city_id');
 
         $dressing->save();
 

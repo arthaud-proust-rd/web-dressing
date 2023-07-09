@@ -8,19 +8,23 @@
         <h3 class="text-2xl -mb-3">
             {{ $dressing->name }}
         </h3>
-        <span class="text-neutral-400">{{ $dressing->clothes->count() }} Vêtements</span>
+        <div class="flex flex-row gap-1 text-neutral-400">
+            <span>{{ $dressing->clothes->count() }} Vêtements</span>
+            <span>-</span>
+            <span>{{ $dressing->city->name }}</span>
+        </div>
         <ul class="flex flex-col">
             @foreach( $dressing->clothesCategoriesStats as $category)
                 @if($category['count']>0)
-                <li
-                    @if($category['class']===\App\Enums\ClothingCategory::ToCategorize)
-                        class="text-amber-500"
-                    @else
-                        class="text-neutral-600"
-                    @endif
-                >
-                    {{ $category['count'] }} {{ $category['class']->toString() }}
-                </li>
+                    <li
+                        @if($category['class']===\App\Enums\ClothingCategory::TO_CATEGORIZE)
+                            class="text-amber-500"
+                        @else
+                            class="text-neutral-600"
+                        @endif
+                    >
+                        {{ $category['count'] }} {{ $category['class']->toString() }}
+                    </li>
                 @endif
             @endforeach
         </ul>

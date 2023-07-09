@@ -31,7 +31,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
+                ->name('api.')
                 ->group(base_path('routes/api.php'));
+
+            Route::prefix('webhook')
+                ->name('webhook.')
+                ->group(base_path('routes/webhook.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));

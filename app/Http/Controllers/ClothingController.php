@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ClothingCategory;
+use App\Enums\ClothingWeatherOptions;
 use App\Http\Requests\StoreClothingRequest;
 use App\Http\Requests\UpdateClothingRequest;
 use App\Models\Clothing;
-use App\Models\Dressing;
+use App\Services\ClothingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
-use App\Helpers\OptimizedImage;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ClothingController extends Controller
 {
@@ -30,63 +29,70 @@ class ClothingController extends Controller
         ]);
     }
 
-    public function create(?Dressing $dressing): View
+    public function create(): Response
     {
-        return view('clothing.create', [
-            'selectedDressing' => $dressing,
+        return Inertia::render('Clothing/CreateOrEdit', [
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list()
+            'clothingCategories' => ClothingCategory::array(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::array(),
         ]);
     }
 
     public function store(StoreClothingRequest $request): RedirectResponse
     {
+        $clothingService = ClothingService::fromEmpty()
+            ->setDressingId($request->dressing_id)
+            ->setName($request->name)
+            ->setCategory($request->category)
+            ->setNote($request->note)
+            ->setWeatherOptionsFromAssociative($request->weather_options);
 
-        $clothing = new Clothing;
-        $clothing->dressing_id = request('dressing_id');
-        $clothing->name = request('name');
-        $clothing->note = request('note');
-        $clothing->category = request('category');
-        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
-        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+        if ($request->images) {
+            $clothingService->setImages($request->images);
+        }
 
-        $clothing->save();
+        $clothingService->save();
 
         session()->flash('status', 'Vêtement ajouté');
 
-        return redirect()->route('dressing.show', $clothing->dressing_id);
+        return redirect()->route('dressing.show', $clothingService->getInstance()->dressing_id);
     }
 
-    public function show(Clothing $clothing): View
+    public function show(Clothing $clothing): Response
     {
-        return view('clothing.show', [
+        return Inertia::render('Clothing/Show', [
             'clothing' => $clothing,
         ]);
     }
 
-    public function edit(Clothing $clothing): View
+    public function edit(Clothing $clothing): Response
     {
-        return view('clothing.edit', [
+        return Inertia::render('Clothing/CreateOrEdit', [
             'clothing' => $clothing,
             'dressings' => Auth::user()->dressings,
-            'clothingCategories' => ClothingCategory::list()
+            'clothingCategories' => ClothingCategory::array(),
+            'clothingWeatherOptions' => ClothingWeatherOptions::array(),
         ]);
     }
 
     public function update(UpdateClothingRequest $request, Clothing $clothing): RedirectResponse
     {
-        $clothing->dressing_id = request('dressing_id');
-        $clothing->name = request('name');
-        $clothing->note = request('note');
-        $clothing->category = request('category');
-        $clothing->image_front = OptimizedImage::getPath($request->file('image_front'));
-        $clothing->image_back = OptimizedImage::getPath($request->file('image_back'));
+        $clothingService = (new ClothingService($clothing))
+            ->setDressingId($request->dressing_id)
+            ->setName($request->name)
+            ->setCategory($request->category)
+            ->setNote($request->note)
+            ->setWeatherOptionsFromAssociative($request->weather_options);
 
-        $clothing->save();
+        if ($request->images) {
+            $clothingService->setImages($request->images);
+        }
+
+        $clothingService->save();
 
         session()->flash('status', 'Vêtement modifié');
 
-        return redirect()->route('dressing.show', request('dressing_id'));
+        return redirect()->route('dressing.show', $request->dressing_id);
     }
 
     public function destroy(Request $request, Clothing $clothing): RedirectResponse

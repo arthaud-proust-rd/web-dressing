@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'openweather' => [
+        'host' => env('OPENWEATHER_HOST'),
+        'key' => env('OPENWEATHER_KEY'),
+    ],
+
+    'meteoconcept' => [
+        'host' => env('METEOCONCEPT_HOST'),
+        'key' => env('METEOCONCEPT_KEY'),
+    ],
 ];
